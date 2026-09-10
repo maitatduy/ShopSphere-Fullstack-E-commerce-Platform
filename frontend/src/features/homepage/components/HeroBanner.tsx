@@ -14,31 +14,31 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev }: HeroBannerPr
     return (
         <section className="relative overflow-hidden bg-[#fafafa]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(80,227,194,0.22),transparent_26%),radial-gradient(circle_at_top_right,rgba(121,40,202,0.18),transparent_30%),radial-gradient(circle_at_bottom,rgba(255,0,128,0.12),transparent_35%)]" />
-            <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-20">
+            <div className="relative mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 lg:px-8 lg:py-20">
                 <div className="flex flex-col justify-center">
-                    <div className="mb-4 inline-flex w-fit rounded-full border border-[#ebebeb] bg-white/80 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-[#4d4d4d]">
+                    <div className="mb-4 inline-flex w-fit rounded-full border border-[#ebebeb] bg-white/80 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#4d4d4d] sm:text-[11px]">
                         {slide.eyebrow}
                     </div>
-                    <h1 className="max-w-xl text-[2.7rem] font-semibold leading-[0.96] tracking-[-0.08em] text-[#171717] sm:text-[3.5rem] lg:text-[5rem]">
+                    <h1 className="max-w-xl text-[2.2rem] font-semibold leading-[0.96] tracking-[-0.08em] text-[#171717] sm:text-[3rem] lg:text-[5rem]">
                         {slide.title}
                     </h1>
-                    <p className="mt-4 text-[1.1rem] font-medium text-[#171717] sm:text-[1.3rem]">
+                    <p className="mt-4 text-[1rem] font-medium text-[#171717] sm:text-[1.2rem] lg:text-[1.3rem]">
                         {slide.subtitle}
                     </p>
-                    <p className="mt-3 max-w-lg text-[1rem] leading-7 text-[#4d4d4d]">
+                    <p className="mt-3 max-w-lg text-[0.96rem] leading-7 text-[#4d4d4d] sm:text-[1rem]">
                         {slide.description}
                     </p>
 
                     <div className="mt-8 flex flex-wrap items-center gap-3">
-                        <button className="rounded-full bg-[#171717] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#2b2b2b]">
+                        <button className="rounded-full bg-[#171717] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#2b2b2b] sm:px-7">
                             Shop now
                         </button>
-                        <button className="rounded-full border border-[#171717] bg-white px-7 py-3 text-sm font-medium text-[#171717] transition hover:bg-[#f5f5f5]">
-                            Explore lookbook
+                        <button className="rounded-full border border-[#171717] bg-white px-6 py-3 text-sm font-medium text-[#171717] transition hover:bg-[#f5f5f5] sm:px-7">
+                            Explore
                         </button>
                     </div>
 
-                    <div className="mt-10 flex items-center gap-4">
+                    <div className="mt-8 flex flex-wrap items-center gap-4">
                         <button
                             type="button"
                             onClick={onPrev}
@@ -55,7 +55,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev }: HeroBannerPr
                         >
                             <FiChevronRight />
                         </button>
-                        <div className="ml-2 flex items-center gap-2">
+                        <div className="ml-1 flex items-center gap-2">
                             {slides.map((item, index) => (
                                 <button
                                     key={item.id}
@@ -80,15 +80,15 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev }: HeroBannerPr
                     </div>
                 </div>
 
-                <div className="relative flex items-center justify-center">
+                <div className="hidden lg:relative lg:flex lg:items-center lg:justify-center">
                     <div
-                        className={`absolute inset-6 rounded-[2rem] bg-gradient-to-br ${slide.accent} opacity-60 blur-3xl`}
+                        className={`absolute inset-4 rounded-4xl bg-linear-to-br ${slide.accent} opacity-60 blur-3xl sm:inset-6`}
                     />
-                    <div className="relative w-full overflow-hidden rounded-[2rem] border border-[#ebebeb] bg-white p-3 shadow-[0_12px_40px_rgba(23,23,23,0.08)]">
+                    <div className="relative w-full overflow-hidden rounded-[1.8rem] border border-[#ebebeb] bg-white p-2 shadow-[0_12px_40px_rgba(23,23,23,0.08)] sm:rounded-4xl sm:p-3">
                         <img
                             src={slide.image}
                             alt={slide.title}
-                            className="h-[32rem] w-full rounded-[1.5rem] object-cover sm:h-[35rem]"
+                            className="h-72 w-full rounded-[1.3rem] object-cover sm:h-96 lg:h-128 lg:rounded-3xl"
                         />
                     </div>
                 </div>

@@ -2,22 +2,22 @@ import type { Product } from "../data/homepageData";
 
 export function ProductGrid({ items, title }: { items: Product[]; title: string }) {
     return (
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mb-8 flex items-end justify-between gap-4">
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
                         Curated picks
                     </p>
-                    <h2 className="mt-2 text-3xl font-semibold tracking-[-0.07em] text-[#171717]">
+                    <h2 className="mt-2 text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
                         {title}
                     </h2>
                 </div>
-                <button className="rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]">
+                <button className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]">
                     View all
                 </button>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
                 {items.map((item) => (
                     <article
                         key={item.id}
