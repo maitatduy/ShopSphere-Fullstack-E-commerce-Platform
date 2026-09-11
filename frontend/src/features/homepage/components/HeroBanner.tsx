@@ -21,6 +21,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
     const actionsRef = useRef<HTMLDivElement | null>(null);
     const imageWrapRef = useRef<HTMLDivElement | null>(null);
     const isFirstRender = useRef(true);
+    const isAnimatingRef = useRef(false);
 
     useLayoutEffect(() => {
         const textTargets = [
@@ -31,9 +32,14 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
             actionsRef.current,
         ].filter(Boolean);
 
+        isAnimatingRef.current = true;
+
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
                 defaults: { ease: "power3.out" },
+                onComplete: () => {
+                    isAnimatingRef.current = false;
+                },
             });
 
             if (isFirstRender.current) {
@@ -76,8 +82,26 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                 );
         });
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            isAnimatingRef.current = false;
+        };
     }, [activeIndex]);
+
+    const handleNext = () => {
+        if (isAnimatingRef.current) return;
+        onNext();
+    };
+
+    const handlePrev = () => {
+        if (isAnimatingRef.current) return;
+        onPrev();
+    };
+
+    const handleSelect = (index: number) => {
+        if (isAnimatingRef.current || index === activeIndex) return;
+        onSelect(index);
+    };
 
     return (
         <section data-homepage-animate className="relative overflow-hidden bg-[#fafafa]">
@@ -121,16 +145,16 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                     <div className="mt-8 flex flex-wrap items-center gap-4">
                         <button
                             type="button"
-                            onClick={onPrev}
-                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] transition hover:border-[#171717]"
+                            onClick={handlePrev}
+                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] transition hover:border-[#171717] disabled:cursor-not-allowed disabled:opacity-50"
                             aria-label="Previous slide"
                         >
                             <FiChevronLeft />
                         </button>
                         <button
                             type="button"
-                            onClick={onNext}
-                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] transition hover:border-[#171717]"
+                            onClick={handleNext}
+                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] transition hover:border-[#171717] disabled:cursor-not-allowed disabled:opacity-50"
                             aria-label="Next slide"
                         >
                             <FiChevronRight />
@@ -140,7 +164,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                                 <button
                                     key={item.id}
                                     type="button"
-                                    onClick={() => onSelect(index)}
+                                    onClick={() => handleSelect(index)}
                                     className={[
                                         "h-2.5 rounded-full transition-all duration-500",
                                         index === activeIndex
