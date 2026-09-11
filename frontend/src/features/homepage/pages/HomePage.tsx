@@ -43,10 +43,7 @@ export function HomePage() {
             });
         }, pageRef);
 
-        return () => {
-            ctx.revert();
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (
