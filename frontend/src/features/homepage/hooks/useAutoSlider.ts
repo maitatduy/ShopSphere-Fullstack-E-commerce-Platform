@@ -1,24 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export function useAutoSlider(length: number, intervalMs = 3000) {
+export function useAutoSlider(length: number, intervalMs = 6000) {
     const [activeIndex, setActiveIndex] = useState(0);
+    const timerRef = useRef<number | null>(null);
 
-    useEffect(() => {
+    const clearTimer = () => {
+        if (timerRef.current !== null) {
+            window.clearInterval(timerRef.current);
+            timerRef.current = null;
+        }
+    };
+
+    const startTimer = () => {
+        clearTimer();
         if (length <= 1) return;
-
-        const timer = window.setInterval(() => {
+        timerRef.current = window.setInterval(() => {
             setActiveIndex((current) => (current + 1) % length);
         }, intervalMs);
+    };
 
-        return () => window.clearInterval(timer);
+    useEffect(() => {
+        startTimer();
+        return clearTimer;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [length, intervalMs]);
 
-    const goToNext = () => setActiveIndex((current) => (current + 1) % length);
-    const goToPrevious = () => setActiveIndex((current) => (current - 1 + length) % length);
+    const goToNext = () => {
+        setActiveIndex((current) => (current + 1) % length);
+        startTimer();
+    };
+
+    const goToPrevious = () => {
+        setActiveIndex((current) => (current - 1 + length) % length);
+        startTimer();
+    };
+
+    const goToIndex = (index: number) => {
+        setActiveIndex(((index % length) + length) % length);
+        startTimer();
+    };
 
     return {
         activeIndex,
         goToNext,
         goToPrevious,
+        goToIndex,
     };
 }

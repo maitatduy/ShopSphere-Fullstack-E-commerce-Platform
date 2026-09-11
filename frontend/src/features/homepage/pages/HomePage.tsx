@@ -12,7 +12,7 @@ import { useAutoSlider } from "../hooks/useAutoSlider";
 gsap.registerPlugin(ScrollTrigger);
 
 export function HomePage() {
-    const { activeIndex, goToNext, goToPrevious } = useAutoSlider(heroSlides.length);
+    const { activeIndex, goToNext, goToPrevious, goToIndex } = useAutoSlider(heroSlides.length);
     const pageRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -58,6 +58,7 @@ export function HomePage() {
                     activeIndex={activeIndex}
                     onNext={goToNext}
                     onPrev={goToPrevious}
+                    onSelect={goToIndex}
                 />
 
                 <ProductGrid items={newArrivals} title="New Arrivals" />
