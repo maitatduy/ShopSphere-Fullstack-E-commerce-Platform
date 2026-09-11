@@ -1,8 +1,53 @@
+import { gsap } from "gsap";
 import type { Product } from "../data/homepageData";
 
 export function ProductGrid({ items, title }: { items: Product[]; title: string }) {
+    const handleCardEnter = (event: React.MouseEvent<HTMLElement>) => {
+        const card = event.currentTarget;
+        const image = card.querySelector("img");
+
+        gsap.to(card, {
+            y: -12,
+            rotateX: 2,
+            rotateY: -2,
+            boxShadow: "0 26px 48px rgba(23,23,23,0.12)",
+            duration: 0.35,
+            ease: "power3.out",
+        });
+
+        if (image) {
+            gsap.to(image, {
+                scale: 1.08,
+                duration: 0.5,
+                ease: "power3.out",
+            });
+        }
+    };
+
+    const handleCardLeave = (event: React.MouseEvent<HTMLElement>) => {
+        const card = event.currentTarget;
+        const image = card.querySelector("img");
+
+        gsap.to(card, {
+            y: 0,
+            rotateX: 0,
+            rotateY: 0,
+            boxShadow: "0 0 0 rgba(23,23,23,0)",
+            duration: 0.3,
+            ease: "power3.out",
+        });
+
+        if (image) {
+            gsap.to(image, {
+                scale: 1,
+                duration: 0.4,
+                ease: "power3.out",
+            });
+        }
+    };
+
     return (
-        <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <section data-homepage-animate className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
@@ -21,7 +66,9 @@ export function ProductGrid({ items, title }: { items: Product[]; title: string 
                 {items.map((item) => (
                     <article
                         key={item.id}
-                        className="group overflow-hidden rounded-[1.25rem] border border-[#ebebeb] bg-white transition hover:-translate-y-1 hover:shadow-[0_12px_20px_rgba(23,23,23,0.04)]"
+                        onMouseEnter={handleCardEnter}
+                        onMouseLeave={handleCardLeave}
+                        className="group overflow-hidden rounded-[1.25rem] border border-[#ebebeb] bg-white transition-transform"
                     >
                         <div className={`relative overflow-hidden ${item.accent}`}>
                             <img
@@ -29,7 +76,7 @@ export function ProductGrid({ items, title }: { items: Product[]; title: string 
                                 alt={item.name}
                                 loading="lazy"
                                 decoding="async"
-                                className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
+                                className="h-80 w-full object-cover transition duration-500"
                             />
                             <button className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#171717] shadow-sm hover:bg-white">
                                 ♡

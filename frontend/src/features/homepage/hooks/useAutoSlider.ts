@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useAutoSlider(length: number, intervalMs = 5000) {
+export function useAutoSlider(length: number, intervalMs = 3000) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {

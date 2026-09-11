@@ -1,4 +1,5 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 const HomePage = lazy(() =>
@@ -8,11 +9,54 @@ const HomePage = lazy(() =>
 );
 
 function AppLoadingScreen({ text = "Loading page..." }: { text?: string }) {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const spinnerRef = useRef<HTMLDivElement | null>(null);
+    const labelRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(
+                spinnerRef.current,
+                { scale: 0.7, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out" },
+            );
+
+            gsap.fromTo(
+                labelRef.current,
+                { y: 12, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, delay: 0.15, ease: "power3.out" },
+            );
+
+            gsap.to(spinnerRef.current, {
+                rotate: 360,
+                duration: 1.2,
+                repeat: -1,
+                ease: "none",
+            });
+
+            gsap.to(containerRef.current, {
+                backgroundPositionX: "100%",
+                duration: 1.5,
+                ease: "none",
+                repeat: -1,
+                yoyo: true,
+            });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="flex min-h-screen items-center justify-center bg-[#fafafa] px-4">
+        <div
+            ref={containerRef}
+            className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.9),rgba(250,250,250,1)_42%,rgba(245,245,245,1)_100%)] bg-size-[200%_200%] px-4"
+        >
             <div className="flex flex-col items-center gap-4" aria-live="polite">
-                <div className="h-14 w-14 animate-spin rounded-full border-4 border-[#e5e5e5] border-t-[#171717]" />
-                <div className="text-center">
+                <div
+                    ref={spinnerRef}
+                    className="h-14 w-14 rounded-full border-4 border-[#e5e5e5] border-t-[#171717] shadow-[0_12px_24px_rgba(23,23,23,0.08)]"
+                />
+                <div ref={labelRef} className="text-center">
                     <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#8f8f8f]">
                         ShopSphere
                     </p>
