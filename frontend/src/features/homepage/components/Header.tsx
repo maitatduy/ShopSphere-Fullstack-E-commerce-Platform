@@ -7,7 +7,7 @@ export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 border-b border-[#ebebeb] bg-[#fafafa]/90 backdrop-blur-sm">
+        <header data-homepage-animate className="sticky top-0 z-50 border-b border-[#ebebeb] bg-[#fafafa]/90 backdrop-blur-sm">
             <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3 md:gap-8">
