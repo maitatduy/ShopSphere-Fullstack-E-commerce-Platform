@@ -27,6 +27,8 @@ export function ProductGrid({ items, title }: { items: Product[]; title: string 
                             <img
                                 src={item.image}
                                 alt={item.name}
+                                loading="lazy"
+                                decoding="async"
                                 className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
                             />
                             <button className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#171717] shadow-sm hover:bg-white">

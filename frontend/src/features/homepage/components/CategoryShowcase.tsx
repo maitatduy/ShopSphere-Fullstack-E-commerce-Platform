@@ -32,6 +32,8 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
                             <img
                                 src={item.image}
                                 alt={item.title}
+                                loading="lazy"
+                                decoding="async"
                                 className="h-76 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-88 lg:h-96"
                             />
                         </div>

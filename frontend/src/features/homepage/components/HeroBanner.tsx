@@ -88,6 +88,8 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev }: HeroBannerPr
                         <img
                             src={slide.image}
                             alt={slide.title}
+                            loading="eager"
+                            decoding="async"
                             className="h-72 w-full rounded-[1.3rem] object-cover sm:h-96 lg:h-128 lg:rounded-3xl"
                         />
                     </div>
