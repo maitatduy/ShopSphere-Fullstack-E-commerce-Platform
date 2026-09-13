@@ -1,0 +1,171 @@
+export type ProductListItem = {
+    id: number;
+    name: string;
+    category: "Men" | "Women" | "Accessories" | "Kids";
+    price: number;
+    oldPrice?: number;
+    image: string;
+    accent: string;
+    color: string;
+    size: string[];
+    status: "new" | "recommend";
+    rating: number;
+};
+
+export const productListItems: ProductListItem[] = [
+    {
+        id: 1,
+        name: "Aero Knit Jacket",
+        category: "Men",
+        price: 138,
+        oldPrice: 179,
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-stone-100",
+        color: "Sand",
+        size: ["S", "M", "L", "XL"],
+        status: "new",
+        rating: 4.8,
+    },
+    {
+        id: 2,
+        name: "Lune Wool Coat",
+        category: "Women",
+        price: 196,
+        oldPrice: 240,
+        image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-amber-50",
+        color: "Ivory",
+        size: ["XS", "S", "M", "L"],
+        status: "recommend",
+        rating: 4.9,
+    },
+    {
+        id: 3,
+        name: "Contour Leather Tote",
+        category: "Accessories",
+        price: 118,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-rose-50",
+        color: "Cocoa",
+        size: ["One Size"],
+        status: "new",
+        rating: 4.7,
+    },
+    {
+        id: 4,
+        name: "Monarch Overshirt",
+        category: "Men",
+        price: 126,
+        oldPrice: 162,
+        image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-slate-100",
+        color: "Charcoal",
+        size: ["M", "L", "XL"],
+        status: "recommend",
+        rating: 4.8,
+    },
+    {
+        id: 5,
+        name: "Noir Trench",
+        category: "Women",
+        price: 220,
+        oldPrice: 285,
+        image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-zinc-100",
+        color: "Black",
+        size: ["S", "M", "L"],
+        status: "new",
+        rating: 5.0,
+    },
+    {
+        id: 6,
+        name: "Drift Canvas Sneaker",
+        category: "Accessories",
+        price: 96,
+        oldPrice: 120,
+        image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-emerald-50",
+        color: "Olive",
+        size: ["36", "37", "38", "39", "40"],
+        status: "recommend",
+        rating: 4.7,
+    },
+    {
+        id: 7,
+        name: "Horizon Knit Polo",
+        category: "Men",
+        price: 112,
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-cyan-50",
+        color: "Sky",
+        size: ["S", "M", "L", "XL"],
+        status: "new",
+        rating: 4.8,
+    },
+    {
+        id: 8,
+        name: "Mila Rib Dress",
+        category: "Women",
+        price: 154,
+        image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-rose-50",
+        color: "Rose",
+        size: ["XS", "S", "M", "L"],
+        status: "recommend",
+        rating: 4.9,
+    },
+    {
+        id: 9,
+        name: "Cinder Knit Set",
+        category: "Kids",
+        price: 84,
+        image: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-violet-50",
+        color: "Lilac",
+        size: ["4Y", "6Y", "8Y", "10Y"],
+        status: "new",
+        rating: 4.6,
+    },
+    {
+        id: 10,
+        name: "Arc Leather Sling",
+        category: "Accessories",
+        price: 88,
+        image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-orange-50",
+        color: "Terracotta",
+        size: ["One Size"],
+        status: "recommend",
+        rating: 4.8,
+    },
+    {
+        id: 11,
+        name: "Nova Pleated Trouser",
+        category: "Women",
+        price: 142,
+        oldPrice: 168,
+        image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-stone-100",
+        color: "Stone",
+        size: ["S", "M", "L", "XL"],
+        status: "new",
+        rating: 4.9,
+    },
+    {
+        id: 12,
+        name: "Harbor Utility Tote",
+        category: "Accessories",
+        price: 104,
+        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80",
+        accent: "bg-sky-50",
+        color: "Navy",
+        size: ["One Size"],
+        status: "recommend",
+        rating: 4.7,
+    },
+];
+
+export const categories = ["All", "Men", "Women", "Accessories", "Kids"] as const;
+export const colorOptions = ["All", "Sand", "Ivory", "Cocoa", "Charcoal", "Black", "Olive", "Sky", "Rose", "Lilac", "Terracotta", "Stone", "Navy"] as const;
+export const sizeOptions = ["All", "XS", "S", "M", "L", "XL", "XXL", "XXXL"] as const;
+export const statusOptions = ["All", "new", "recommend"] as const;

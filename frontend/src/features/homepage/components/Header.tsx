@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { FiHeart, FiMenu, FiSearch, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
 
-const navItems = ["Shop", "Men", "Women", "Kids"];
+const navItems = [
+    { label: "Shop", href: "/products" },
+    { label: "Men", href: "/products" },
+    { label: "Women", href: "/products" },
+    { label: "Kids", href: "/products" },
+];
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,11 +23,11 @@ export function Header() {
                         <nav className="hidden items-center gap-1 md:flex">
                             {navItems.map((item) => (
                                 <a
-                                    key={item}
-                                    href="#"
+                                    key={item.label}
+                                    href={item.href}
                                     className="rounded-full px-3 py-2 text-[0.95rem] font-medium text-[#4d4d4d] transition hover:bg-[#f2f2f2] hover:text-[#171717]"
                                 >
-                                    {item}
+                                    {item.label}
                                 </a>
                             ))}
                         </nav>
@@ -60,11 +65,11 @@ export function Header() {
                         <nav className="flex flex-col gap-1">
                             {navItems.map((item) => (
                                 <a
-                                    key={item}
-                                    href="#"
+                                    key={item.label}
+                                    href={item.href}
                                     className="rounded-2xl px-3 py-3 text-base font-medium text-[#171717] transition hover:bg-[#f2f2f2]"
                                 >
-                                    {item}
+                                    {item.label}
                                 </a>
                             ))}
                         </nav>
