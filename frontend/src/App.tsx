@@ -8,6 +8,12 @@ const HomePage = lazy(() =>
     })),
 );
 
+const ProductListPage = lazy(() =>
+    import("./features/products/pages/ProductListPage").then((module) => ({
+        default: module.ProductListPage,
+    })),
+);
+
 function AppLoadingScreen({ text = "Loading page..." }: { text?: string }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const spinnerRef = useRef<HTMLDivElement | null>(null);
@@ -75,6 +81,7 @@ export default function App() {
             <Suspense fallback={<AppLoadingScreen />}>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/products" element={<ProductListPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Suspense>
