@@ -14,6 +14,12 @@ const ProductListPage = lazy(() =>
     })),
 );
 
+const ProductDetailPage = lazy(() =>
+    import("./features/products/pages/ProductDetailPage").then((module) => ({
+        default: module.ProductDetailPage,
+    })),
+);
+
 function AppLoadingScreen({ text = "Loading page..." }: { text?: string }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const spinnerRef = useRef<HTMLDivElement | null>(null);
@@ -82,6 +88,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/products" element={<ProductListPage />} />
+                    <Route path="/products/:productId" element={<ProductDetailPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Suspense>
