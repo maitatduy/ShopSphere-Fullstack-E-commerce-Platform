@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 import type { CategoryBlock } from "../data/homepageData";
 
 type CategoryShowcaseProps = {
@@ -6,8 +7,50 @@ type CategoryShowcaseProps = {
 };
 
 export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
+    const handleCardEnter = (event: React.MouseEvent<HTMLElement>) => {
+        const card = event.currentTarget;
+        const image = card.querySelector("img");
+
+        gsap.to(card, {
+            y: -10,
+            rotateX: 2,
+            boxShadow: "0 24px 50px rgba(23,23,23,0.08)",
+            duration: 0.35,
+            ease: "power3.out",
+        });
+
+        if (image) {
+            gsap.to(image, {
+                scale: 1.08,
+                duration: 0.5,
+                ease: "power3.out",
+            });
+        }
+    };
+
+    const handleCardLeave = (event: React.MouseEvent<HTMLElement>) => {
+        const card = event.currentTarget;
+        const image = card.querySelector("img");
+
+        gsap.to(card, {
+            y: 0,
+            rotateX: 0,
+            boxShadow: "0 0 0 rgba(23,23,23,0)",
+            duration: 0.3,
+            ease: "power3.out",
+        });
+
+        if (image) {
+            gsap.to(image, {
+                scale: 1,
+                duration: 0.4,
+                ease: "power3.out",
+            });
+        }
+    };
+
     return (
-        <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <section data-homepage-animate className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
@@ -26,13 +69,17 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
                 {items.map((item) => (
                     <article
                         key={item.id}
+                        onMouseEnter={handleCardEnter}
+                        onMouseLeave={handleCardLeave}
                         className="group overflow-hidden rounded-3xl border border-[#ebebeb] bg-white"
                     >
                         <div className="overflow-hidden">
                             <img
                                 src={item.image}
                                 alt={item.title}
-                                className="h-76 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-88 lg:h-96"
+                                loading="lazy"
+                                decoding="async"
+                                className="h-76 w-full object-cover transition duration-500 sm:h-88 lg:h-96"
                             />
                         </div>
                         <div className="space-y-2 p-5">
