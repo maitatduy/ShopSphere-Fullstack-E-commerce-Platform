@@ -11,13 +11,13 @@ import com.shopsphere.backend.mapper.CategoryMapper;
 import com.shopsphere.backend.repository.CategoryRepository;
 import com.shopsphere.backend.repository.CategoryTypeRepository;
 import com.shopsphere.backend.service.CategoryTypeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,11 +42,11 @@ public class CategoryTypeServiceImpl implements CategoryTypeService {
     }
 
     @Override
-    public List<CategoryTypeResponse> getAll(UUID categoryId) {
-        List<CategoryType> types = categoryId != null
-                ? categoryTypeRepository.findByCategoryId(categoryId)
-                : categoryTypeRepository.findAll();
-        return types.stream().map(categoryMapper::toResponse).collect(Collectors.toList());
+    public Page<CategoryTypeResponse> getAll(UUID categoryId, Pageable pageable) {
+        Page<CategoryType> types = categoryId != null
+                ? categoryTypeRepository.findByCategoryId(categoryId, pageable)
+                : categoryTypeRepository.findAll(pageable);
+        return types.map(categoryMapper::toResponse);
     }
 
     @Override
