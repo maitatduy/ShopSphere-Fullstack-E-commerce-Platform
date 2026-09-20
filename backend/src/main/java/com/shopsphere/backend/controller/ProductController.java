@@ -3,6 +3,7 @@ package com.shopsphere.backend.controller;
 import com.shopsphere.backend.dto.request.ProductRequest;
 import com.shopsphere.backend.dto.response.ProductResponse;
 import com.shopsphere.backend.service.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
+@Tag(name = "Product", description = "CRUD API cho sản phẩm")
 public class ProductController {
     private final ProductService productService;
 
