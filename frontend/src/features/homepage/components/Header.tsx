@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiHeart, FiMenu, FiSearch, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const navItems = [
     { label: "Shop", href: "/products" },
@@ -46,7 +47,9 @@ export function Header() {
                         <div className="hidden items-center gap-2 md:flex">
                             <ActionButton label="Wishlist" icon={<FiHeart />} className="hidden lg:inline-flex" />
                             <ActionButton label="Account" icon={<FiUser />} className="hidden lg:inline-flex" />
-                            <ActionButton label="Cart" icon={<FiShoppingBag />} compact />
+                            <Link to="/cart" aria-label="Cart">
+                                <ActionButton label="Cart" icon={<FiShoppingBag />} compact />
+                            </Link>
                         </div>
 
                         <button
@@ -77,7 +80,9 @@ export function Header() {
                         <div className="mt-4 grid grid-cols-3 gap-2">
                             <ActionButton label="Wishlist" icon={<FiHeart />} fullWidth />
                             <ActionButton label="Account" icon={<FiUser />} fullWidth />
-                            <ActionButton label="Cart" icon={<FiShoppingBag />} compact fullWidth />
+                            <Link to="/cart" className="w-full" aria-label="Cart">
+                                <ActionButton label="Cart" icon={<FiShoppingBag />} compact fullWidth />
+                            </Link>
                         </div>
                     </div>
                 ) : null}

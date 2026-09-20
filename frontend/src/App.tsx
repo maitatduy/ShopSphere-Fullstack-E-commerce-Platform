@@ -20,6 +20,18 @@ const ProductDetailPage = lazy(() =>
     })),
 );
 
+const CartPage = lazy(() =>
+    import("./features/cart/pages/CartPage").then((module) => ({
+        default: module.CartPage,
+    })),
+);
+
+const CheckoutPage = lazy(() =>
+    import("./features/cart/pages/CheckoutPage").then((module) => ({
+        default: module.CheckoutPage,
+    })),
+);
+
 function AppLoadingScreen({ text = "Loading page..." }: { text?: string }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const spinnerRef = useRef<HTMLDivElement | null>(null);
@@ -89,6 +101,8 @@ export default function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/products" element={<ProductListPage />} />
                     <Route path="/products/:productId" element={<ProductDetailPage />} />
+                    <Route path="/cart" element={<CartPage />} />
+                    <Route path="/checkout" element={<CheckoutPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </Suspense>
