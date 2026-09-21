@@ -2,8 +2,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiFilter } from "react-icons/fi";
-import { Footer } from "../../homepage/components/Footer";
-import { Header } from "../../homepage/components/Header";
+import { AppLayout } from "../../../shared/layouts/AppLayout";
 import { ProductFilterSidebar } from "../components/ProductFilterSidebar";
 import { ProductGrid } from "../components/ProductGrid";
 import { ProductPagination } from "../components/ProductPagination";
@@ -144,10 +143,9 @@ export function ProductListPage() {
     };
 
     return (
-        <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
-            <Header />
-
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+        <AppLayout>
+            <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
+                <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
                 <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                     <div className="flex items-center gap-3">
                         <div>
@@ -261,9 +259,8 @@ export function ProductListPage() {
                         ) : null}
                     </section>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+                </main>
+            </div>
+        </AppLayout>
     );
 }
