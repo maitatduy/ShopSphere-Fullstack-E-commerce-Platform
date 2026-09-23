@@ -7,12 +7,11 @@ import com.shopsphere.backend.service.CategoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -36,8 +35,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<Page<CategoryResponse>>> getAll(Pageable pageable) {
-        return ResponseEntity.ok(ApiResponse.success(categoryService.getAll(pageable)));
+    public ResponseEntity<ApiResponse<List<CategoryResponse>>> getAll() {
+        return ResponseEntity.ok(ApiResponse.success(categoryService.getAll()));
     }
 
     @PutMapping("/{id}")

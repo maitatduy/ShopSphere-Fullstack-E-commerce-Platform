@@ -3,10 +3,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiChevronRight, FiLock } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { AppLayout } from "../../../shared/layouts/AppLayout";
 import { CheckoutDeliveryForm } from "../components/CheckoutDeliveryForm";
 import { CheckoutOrderSummary } from "../components/CheckoutOrderSummary";
-import { Footer } from "../../homepage/components/Footer";
-import { Header } from "../../homepage/components/Header";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,10 +43,9 @@ export function CheckoutPage() {
     }, []);
 
     return (
-        <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
-            <Header />
-
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+        <AppLayout>
+            <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
+                <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
                 <nav className="mb-8 flex items-center gap-2 text-sm text-[#8f8f8f]">
                     <Link to="/" className="transition hover:text-[#171717]">
                         Home
@@ -71,9 +69,8 @@ export function CheckoutPage() {
                     <CheckoutDeliveryForm />
                     <CheckoutOrderSummary />
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+                </main>
+            </div>
+        </AppLayout>
     );
 }

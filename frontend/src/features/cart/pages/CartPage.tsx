@@ -3,9 +3,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiChevronRight, FiMinus, FiPlus, FiShoppingBag, FiTrash2 } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { Footer } from "../../homepage/components/Footer";
-import { Header } from "../../homepage/components/Header";
 import { productListItems } from "../../products/data/productsData";
+import { AppLayout } from "../../../shared/layouts/AppLayout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,10 +85,9 @@ export function CartPage() {
     }, []);
 
     return (
-        <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
-            <Header />
-
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+        <AppLayout>
+            <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
+                <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
                 <nav className="mb-8 flex items-center gap-2 text-sm text-[#8f8f8f]">
                     <Link to="/" className="transition hover:text-[#171717]">
                         Home
@@ -262,9 +260,8 @@ export function CartPage() {
                         </div>
                     </aside>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+                </main>
+            </div>
+        </AppLayout>
     );
 }
