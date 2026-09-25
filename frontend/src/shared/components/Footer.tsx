@@ -14,37 +14,37 @@ export function Footer() {
 
                     <div>
                         <h3 className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
-                            Shop
+                            Mua sắm
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm text-[#4d4d4d]">
-                            <li>New arrivals</li>
-                            <li>Men</li>
-                            <li>Women</li>
-                            <li>Kids</li>
+                            <li>Hàng mới về</li>
+                            <li>Nam</li>
+                            <li>Nữ</li>
+                            <li>Trẻ em</li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
-                            Company
+                            Về chúng tôi
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm text-[#4d4d4d]">
-                            <li>About</li>
-                            <li>Journal</li>
-                            <li>Careers</li>
-                            <li>Support</li>
+                            <li>Giới thiệu</li>
+                            <li>Blog</li>
+                            <li>Tuyển dụng</li>
+                            <li>Hỗ trợ</li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
-                            Follow
+                            Theo dõi
                         </h3>
                         <ul className="mt-4 space-y-3 text-sm text-[#4d4d4d]">
                             <li>Instagram</li>
                             <li>Pinterest</li>
                             <li>Facebook</li>
-                            <li>Newsletter</li>
+                            <li>Bản tin</li>
                         </ul>
                     </div>
                 </div>
@@ -54,9 +54,9 @@ export function Footer() {
                 <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-sm text-[#8f8f8f] sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
                     <span>© 2026 ShopSphere</span>
                     <div className="flex flex-wrap items-center gap-4 sm:gap-5">
-                        <span>Privacy</span>
-                        <span>Terms</span>
-                        <span>Shipping</span>
+                        <span>Bảo mật</span>
+                        <span>Điều khoản</span>
+                        <span>Vận chuyển</span>
                     </div>
                 </div>
             </div>

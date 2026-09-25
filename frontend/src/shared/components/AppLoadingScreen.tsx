@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-export function AppLoadingScreen({ text = "Loading page..." }: { text?: string }) {
+export function AppLoadingScreen({ text = "Đang tải..." }: { text?: string }) {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const spinnerRef = useRef<HTMLDivElement | null>(null);
     const labelRef = useRef<HTMLDivElement | null>(null);

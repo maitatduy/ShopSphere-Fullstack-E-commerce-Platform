@@ -23,10 +23,10 @@ const colorSwatches: Record<string, string> = {
 };
 
 const priceOptions = [
-    { label: "All", value: "all" },
-    { label: "Under $100", value: "0-100" },
+    { label: "Tất cả", value: "all" },
+    { label: "Dưới $100", value: "0-100" },
     { label: "$100 - $180", value: "100-180" },
-    { label: "Over $180", value: "180+" },
+    { label: "Trên $180", value: "180+" },
 ] as const;
 
 export type ProductFilterSidebarProps = {
@@ -74,21 +74,21 @@ export function ProductFilterSidebar({
                     onClick={onReset}
                     className="text-xs font-medium tracking-[0.12em] text-[#171717] uppercase transition hover:text-[#4d4d4d]"
                 >
-                    Reset
+                    Xóa lọc
                 </button>
             </div>
 
             <div className="mt-5 space-y-6">
                 <label className="block">
                     <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                        Search
+                        Tìm kiếm
                     </span>
                     <div className="flex items-center gap-2 rounded-full border border-[#ebebeb] bg-[#fafafa] px-3 py-2.5">
                         <FiSearch className="text-sm text-[#8f8f8f]" />
                         <input
                             value={search}
                             onChange={(event) => onSearchChange(event.target.value)}
-                            placeholder="Search products"
+                            placeholder="Tìm sản phẩm"
                             className="w-full bg-transparent text-sm text-[#171717] placeholder:text-[#8f8f8f] outline-none"
                         />
                     </div>
@@ -96,7 +96,7 @@ export function ProductFilterSidebar({
 
                 <div>
                     <p className="mb-3 text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                        Category
+                        Danh mục
                     </p>
                     <div className="flex flex-wrap gap-2">
                         {categories.map((item) => (
@@ -120,7 +120,7 @@ export function ProductFilterSidebar({
                 <div className="space-y-4">
                     <div>
                         <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Price
+                            Giá
                         </span>
                         <div className="grid gap-2">
                             {priceOptions.map((option) => (
@@ -147,7 +147,7 @@ export function ProductFilterSidebar({
 
                     <div>
                         <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Color
+                            Màu sắc
                         </span>
                         <div className="flex flex-wrap gap-2.5">
                             {colorOptions.map((color) => (
@@ -177,7 +177,7 @@ export function ProductFilterSidebar({
 
                     <div>
                         <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Size
+                            Kích cỡ
                         </span>
                         <div className="flex flex-wrap gap-2">
                             {sizeOptions.filter((size) => size !== "All").map((size) => (
@@ -200,7 +200,7 @@ export function ProductFilterSidebar({
 
                     <div>
                         <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Status
+                            Trạng thái
                         </span>
                         <div className="flex flex-wrap gap-2">
                             {statusOptions.filter((status) => status !== "All").map((status) => (

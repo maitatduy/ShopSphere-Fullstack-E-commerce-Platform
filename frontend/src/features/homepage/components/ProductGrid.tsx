@@ -54,14 +54,14 @@ export function ProductGrid({ items, title }: { items: Product[]; title: string 
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                        Curated picks
+                        Tuyển chọn nổi bật
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
                         {title}
                     </h2>
                 </div>
                 <button className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]">
-                    View all
+                    Xem tất cả
                 </button>
             </div>
 
@@ -96,7 +96,7 @@ export function ProductGrid({ items, title }: { items: Product[]; title: string 
                         <div className="space-y-3 p-5">
                             <div className="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.14em] text-[#8f8f8f]">
                                 <span>{item.category}</span>
-                                <span>New</span>
+                                <span>Mới</span>
                             </div>
 
                             <h3 className="text-lg font-medium text-[#171717]">{item.name}</h3>
@@ -119,7 +119,7 @@ export function ProductGrid({ items, title }: { items: Product[]; title: string 
                                     event.stopPropagation();
                                 }}
                             >
-                                Add to cart
+                                Thêm vào giỏ
                             </button>
                         </div>
                     </article>

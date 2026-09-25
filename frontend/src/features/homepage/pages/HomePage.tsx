@@ -20,7 +20,7 @@ export function HomePage() {
         const mapped = categories.slice(0, 6).map((category, index) => ({
             id: category.id,
             title: category.name,
-            subtitle: category.description || (index % 2 === 0 ? "Curated essentials" : "Modern staples"),
+            subtitle: category.description || (index % 2 === 0 ? "Tinh hoa được chọn lọc" : "Phong cách hiện đại"),
             image:
                 category.image ||
                 [
@@ -84,13 +84,13 @@ export function HomePage() {
 
                 {error ? (
                     <div className="mx-auto max-w-7xl px-4 pb-4 text-sm text-[#8f8f8f] sm:px-6 lg:px-8">
-                        Unable to load categories from server, showing demo categories instead.
+                    Không thể tải danh mục từ máy chủ, đang hiển thị danh mục mẫu.
                     </div>
                 ) : null}
 
                 {loading && categories.length === 0 ? (
                     <div className="mx-auto max-w-7xl px-4 py-6 text-sm text-[#8f8f8f] sm:px-6 lg:px-8">
-                        Loading categories...
+                        Đang tải danh mục...
                     </div>
                 ) : null}
 

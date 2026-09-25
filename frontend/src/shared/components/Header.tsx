@@ -46,11 +46,11 @@ export function Header() {
                             className="hidden max-w-[18rem] flex-1 items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm text-[#8f8f8f] shadow-[0_1px_1px_rgba(23,23,23,0.02)] md:flex"
                         >
                             <FiSearch className="text-base" aria-hidden="true" />
-                            <span className="sr-only">Search products</span>
+                            <span className="sr-only">Tìm kiếm sản phẩm</span>
                             <input
                                 id="header-search"
                                 type="search"
-                                placeholder="Search"
+                                placeholder="Tìm kiếm"
                                 className="w-full border-none bg-transparent text-[#171717] placeholder:text-[#8f8f8f] focus:outline-none"
                             />
                         </label>

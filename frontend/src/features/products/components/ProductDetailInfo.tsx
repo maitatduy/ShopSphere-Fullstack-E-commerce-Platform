@@ -43,7 +43,7 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
                         <span className="font-medium">{product.rating}</span>
                     </div>
                     <span>•</span>
-                    <span>24 reviews</span>
+                    <span>24 đánh giá</span>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
             <div className="rounded-2xl border border-[#ebebeb] bg-[#fafafa] p-4">
                 <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#8f8f8f]">
-                        Color
+                        Màu sắc
                     </p>
                     <span className="text-sm text-[#4d4d4d]">{product.color}</span>
                 </div>
@@ -86,10 +86,10 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
             <div>
                 <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#8f8f8f]">
-                        Size
+                        Kích cỡ
                     </p>
                     <button type="button" className="text-sm font-medium text-[#171717] underline-offset-4 hover:underline">
-                        Size guide
+                        Bảng size
                     </button>
                 </div>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -117,7 +117,7 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
                         type="button"
                         onClick={() => setQuantity((value) => Math.max(1, value - 1))}
                         className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#171717] transition hover:bg-[#f5f5f5]"
-                        aria-label="Decrease quantity"
+                        aria-label="Giảm số lượng"
                     >
                         <FiMinus className="text-base" />
                     </button>
@@ -128,7 +128,7 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
                         type="button"
                         onClick={() => setQuantity((value) => value + 1)}
                         className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[#171717] transition hover:bg-[#f5f5f5]"
-                        aria-label="Increase quantity"
+                        aria-label="Tăng số lượng"
                     >
                         <FiPlus className="text-base" />
                     </button>
@@ -139,13 +139,13 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
                     className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#171717] px-5 py-3 text-sm font-medium text-white transition hover:bg-[#2b2b2b]"
                 >
                     <FiShoppingBag className="text-base" />
-                    Add to cart
+                    Thêm vào giỏ
                 </button>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-                <FeaturePill icon={<FiTruck />} label="Free shipping over $150" />
-                <FeaturePill icon={<FiShield />} label="2 year warranty" />
+                <FeaturePill icon={<FiTruck />} label="Miễn phí vận chuyển trên $150" />
+                <FeaturePill icon={<FiShield />} label="Bảo hành 2 năm" />
             </div>
         </div>
     );

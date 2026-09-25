@@ -150,15 +150,15 @@ export function ProductListPage() {
                     <div className="flex items-center gap-3">
                         <div>
                             <p className="text-[11px] font-medium tracking-[0.2em] text-[#8f8f8f]">
-                                Collection
+                                Bộ sưu tập
                             </p>
                             <h1 className="mt-2 text-3xl font-medium tracking-[-0.04em] text-[#171717] sm:text-4xl">
-                                Curated essentials
+                                Tinh hoa được chọn lọc
                             </h1>
                         </div>
                         <button
                             type="button"
-                            aria-label={isFilterOpen ? "Hide filters" : "Show filters"}
+                            aria-label={isFilterOpen ? "Ẩn bộ lọc" : "Hiện bộ lọc"}
                             aria-expanded={isFilterOpen}
                             onClick={() => setIsFilterOpen((value) => !value)}
                             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] shadow-sm transition hover:border-[#171717] hover:bg-[#fafafa]"
@@ -166,7 +166,7 @@ export function ProductListPage() {
                             <FiFilter className="text-base" />
                         </button>
                     </div>
-                    <p className="text-sm text-[#4d4d4d]">{filteredProducts.length} items available</p>
+                    <p className="text-sm text-[#4d4d4d]">{filteredProducts.length} sản phẩm</p>
                 </div>
 
                 <div
@@ -214,16 +214,16 @@ export function ProductListPage() {
                         <div className="flex flex-col gap-4 rounded-3xl border border-[#ebebeb] bg-white p-4 shadow-[0_10px_22px_rgba(23,23,23,0.02)] sm:p-5 md:flex-row md:items-center md:justify-between">
                             <div>
                                 <p className="text-[11px] font-medium tracking-[0.18em] text-[#8f8f8f] uppercase">
-                                    Showing products
+                                    Đang hiển thị
                                 </p>
                                 <p className="mt-2 text-lg font-medium text-[#171717]">
                                     {filteredProducts.length > 0
-                                        ? `Page ${safeCurrentPage} of ${totalPages}`
-                                        : "No matches found"}
+                                        ? `Trang ${safeCurrentPage} / ${totalPages}`
+                                        : "Không tìm thấy kết quả"}
                                 </p>
                             </div>
                             <div className="rounded-full border border-[#ebebeb] bg-[#fafafa] px-3 py-2 text-sm text-[#4d4d4d]">
-                                {filteredProducts.length} results
+                                {filteredProducts.length} kết quả
                             </div>
                         </div>
 
@@ -236,14 +236,14 @@ export function ProductListPage() {
                         ) : (
                             <div className="rounded-3xl border border-dashed border-[#d9d9d9] bg-white py-16 text-center">
                                 <p className="text-xl font-medium text-[#171717]">
-                                    No products match your filters.
+                                    Không có sản phẩm nào phù hợp với bộ lọc.
                                 </p>
                                 <button
                                     type="button"
                                     onClick={resetFilters}
                                     className="mt-4 rounded-full border border-[#171717] bg-[#171717] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#2b2b2b]"
                                 >
-                                    Reset filters
+                                    Xóa bộ lọc
                                 </button>
                             </div>
                         )}

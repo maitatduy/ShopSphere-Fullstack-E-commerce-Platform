@@ -62,11 +62,11 @@ export function ProductDetailPage() {
                 <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
                 <nav className="mb-8 flex items-center gap-2 text-sm text-[#8f8f8f]">
                     <Link to="/" className="transition hover:text-[#171717]">
-                        Home
+                        Trang chủ
                     </Link>
                     <FiChevronRight className="text-base" />
                     <Link to="/products" className="transition hover:text-[#171717]">
-                        Shop
+                        Cửa hàng
                     </Link>
                     <FiChevronRight className="text-base" />
                     <span className="text-[#171717]">{product.name}</span>
@@ -78,10 +78,10 @@ export function ProductDetailPage() {
                         className="inline-flex items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-4 py-2.5 text-sm font-medium text-[#171717] transition hover:border-[#171717]"
                     >
                         <FiArrowLeft className="text-base" />
-                        Back to shop
+                        Quay lại cửa hàng
                     </Link>
                     <div className="hidden items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-3 py-2 text-sm text-[#4d4d4d] sm:inline-flex">
-                        <span>In stock</span>
+                        <span>Còn hàng</span>
                         <span className="h-2 w-2 rounded-full bg-[#1db954]" />
                     </div>
                 </div>
