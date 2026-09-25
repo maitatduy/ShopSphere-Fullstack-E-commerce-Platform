@@ -41,10 +41,15 @@ export function Header() {
                     </div>
 
                     <div className="flex items-center justify-end gap-2 sm:gap-3">
-                        <label className="hidden max-w-[18rem] flex-1 items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm text-[#8f8f8f] shadow-[0_1px_1px_rgba(23,23,23,0.02)] md:flex">
-                            <FiSearch className="text-base" />
+                        <label
+                            htmlFor="header-search"
+                            className="hidden max-w-[18rem] flex-1 items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm text-[#8f8f8f] shadow-[0_1px_1px_rgba(23,23,23,0.02)] md:flex"
+                        >
+                            <FiSearch className="text-base" aria-hidden="true" />
+                            <span className="sr-only">Search products</span>
                             <input
-                                type="text"
+                                id="header-search"
+                                type="search"
                                 placeholder="Search"
                                 className="w-full border-none bg-transparent text-[#171717] placeholder:text-[#8f8f8f] focus:outline-none"
                             />

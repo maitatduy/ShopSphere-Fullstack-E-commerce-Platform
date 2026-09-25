@@ -1,63 +1,36 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiChevronRight, FiMinus, FiPlus, FiShoppingBag, FiTrash2 } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { productListItems } from "../../products/data/productsData";
 import { AppLayout } from "../../../shared/layouts/AppLayout";
+import { useCartStore } from "../store/cartStore";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const cartSeed = [
-    { id: 1, quantity: 1 },
-    { id: 2, quantity: 2 },
-    { id: 4, quantity: 1 },
-];
 
 export function CartPage() {
     const pageRef = useRef<HTMLDivElement | null>(null);
     const navigate = useNavigate();
     const [promoCode, setPromoCode] = useState("");
     const [appliedPromo, setAppliedPromo] = useState(false);
-    const [cartItems, setCartItems] = useState(() =>
-        cartSeed
-            .map(({ id, quantity }) => {
-                const item = productListItems.find((product) => product.id === id);
-                return item ? { ...item, quantity } : null;
-            })
-            .filter((item): item is (typeof productListItems)[number] & { quantity: number } => Boolean(item)),
-    );
+    const { items: cartItems, removeItem, updateQuantity, subtotal: getSubtotal } = useCartStore();
 
-    const updateQuantity = (productId: number, change: number) => {
-        setCartItems((currentItems) =>
-            currentItems.flatMap((item) => {
-                if (item.id !== productId) {
-                    return [item];
-                }
-
-                const nextQuantity = item.quantity + change;
-                return nextQuantity <= 0 ? [] : [{ ...item, quantity: nextQuantity }];
-            }),
-        );
-    };
-
-    const removeItem = (productId: number) => {
-        setCartItems((currentItems) => currentItems.filter((item) => item.id !== productId));
-    };
-
-    const subtotal = useMemo(
-        () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-        [cartItems],
-    );
+    const subtotal = getSubtotal();
 
     const shipping = subtotal > 300 ? 0 : 24;
     const discount = appliedPromo ? subtotal * 0.1 : 0;
     const total = Math.max(subtotal + shipping - discount, 0);
 
     useEffect(() => {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const sections = gsap.utils.toArray<HTMLElement>("[data-cart-animate]");
 
         const ctx = gsap.context(() => {
+            if (prefersReducedMotion) {
+                sections.forEach((section) => gsap.set(section, { opacity: 1, y: 0, filter: "blur(0px)" }));
+                return;
+            }
+
             sections.forEach((section) => {
                 gsap.fromTo(
                     section,

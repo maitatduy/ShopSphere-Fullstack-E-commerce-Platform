@@ -1,111 +1,30 @@
-import { Suspense, lazy, useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-
-const HomePage = lazy(() =>
-    import("./features/homepage/pages/HomePage").then((module) => ({
-        default: module.HomePage,
-    })),
-);
-
-const ProductListPage = lazy(() =>
-    import("./features/products/pages/ProductListPage").then((module) => ({
-        default: module.ProductListPage,
-    })),
-);
-
-const ProductDetailPage = lazy(() =>
-    import("./features/products/pages/ProductDetailPage").then((module) => ({
-        default: module.ProductDetailPage,
-    })),
-);
-
-const CartPage = lazy(() =>
-    import("./features/cart/pages/CartPage").then((module) => ({
-        default: module.CartPage,
-    })),
-);
-
-const CheckoutPage = lazy(() =>
-    import("./features/cart/pages/CheckoutPage").then((module) => ({
-        default: module.CheckoutPage,
-    })),
-);
-
-function AppLoadingScreen({ text = "Loading page..." }: { text?: string }) {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const spinnerRef = useRef<HTMLDivElement | null>(null);
-    const labelRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.fromTo(
-                spinnerRef.current,
-                { scale: 0.7, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out" },
-            );
-
-            gsap.fromTo(
-                labelRef.current,
-                { y: 12, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, delay: 0.15, ease: "power3.out" },
-            );
-
-            gsap.to(spinnerRef.current, {
-                rotate: 360,
-                duration: 1.2,
-                repeat: -1,
-                ease: "none",
-            });
-
-            gsap.to(containerRef.current, {
-                backgroundPositionX: "100%",
-                duration: 1.5,
-                ease: "none",
-                repeat: -1,
-                yoyo: true,
-            });
-        }, containerRef);
-
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <div
-            ref={containerRef}
-            className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.9),rgba(250,250,250,1)_42%,rgba(245,245,245,1)_100%)] bg-size-[200%_200%] px-4"
-        >
-            <div className="flex flex-col items-center gap-4" aria-live="polite">
-                <div
-                    ref={spinnerRef}
-                    className="h-14 w-14 rounded-full border-4 border-[#e5e5e5] border-t-[#171717] shadow-[0_12px_24px_rgba(23,23,23,0.08)]"
-                />
-                <div ref={labelRef} className="text-center">
-                    <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#8f8f8f]">
-                        ShopSphere
-                    </p>
-                    <p className="mt-2 text-sm font-medium uppercase tracking-[0.18em] text-[#4d4d4d]">
-                        {text}
-                    </p>
-                </div>
-            </div>
-        </div>
-    );
-}
+import { AppErrorBoundary } from "./shared/components/AppErrorBoundary";
+import { AppLoadingScreen } from "./shared/components/AppLoadingScreen";
+import {
+    CartPage,
+    CheckoutPage,
+    HomePage,
+    ProductDetailPage,
+    ProductListPage,
+} from "./router/lazyRoutes";
 
 export default function App() {
     return (
         <BrowserRouter>
-            <Suspense fallback={<AppLoadingScreen />}>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/products" element={<ProductListPage />} />
-                    <Route path="/products/:productId" element={<ProductDetailPage />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-            </Suspense>
+            <AppErrorBoundary>
+                <Suspense fallback={<AppLoadingScreen />}>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/products" element={<ProductListPage />} />
+                        <Route path="/products/:productId" element={<ProductDetailPage />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/checkout" element={<CheckoutPage />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </Suspense>
+            </AppErrorBoundary>
         </BrowserRouter>
     );
 }
