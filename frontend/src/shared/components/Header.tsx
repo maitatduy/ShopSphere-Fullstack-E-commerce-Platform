@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FiHeart, FiMenu, FiSearch, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useCategoryStore } from "../../categories/store/categoryStore";
+import { useCategoryStore } from "../../features/categories/store/categoryStore";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +12,6 @@ export function Header() {
     }, [fetchCategories]);
 
     const navItems = [
-        { label: "Shop", href: "/products" },
         ...categories.slice(0, 4).map((category) => ({
             label: category.name,
             href: `/products?category=${category.id}`,
@@ -24,29 +23,34 @@ export function Header() {
             <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3 md:gap-8">
-                        <a href="/" className="text-[1.4rem] font-semibold tracking-[-0.08em] text-[#171717] sm:text-[1.7rem]">
+                        <Link to="/" className="text-[1.4rem] font-semibold tracking-[-0.08em] text-[#171717] sm:text-[1.7rem]">
                             ShopSphere
-                        </a>
+                        </Link>
 
                         <nav className="hidden items-center gap-1 md:flex">
                             {navItems.map((item) => (
-                                <a
-                                    key={item.label}
-                                    href={item.href}
+                                <Link
+                                    key={`${item.label}-${item.href}`}
+                                    to={item.href}
                                     className="rounded-full px-3 py-2 text-[0.95rem] font-medium text-[#4d4d4d] transition hover:bg-[#f2f2f2] hover:text-[#171717]"
                                 >
                                     {item.label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
                     </div>
 
                     <div className="flex items-center justify-end gap-2 sm:gap-3">
-                        <label className="hidden max-w-[18rem] flex-1 items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm text-[#8f8f8f] shadow-[0_1px_1px_rgba(23,23,23,0.02)] md:flex">
-                            <FiSearch className="text-base" />
+                        <label
+                            htmlFor="header-search"
+                            className="hidden max-w-[18rem] flex-1 items-center gap-2 rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm text-[#8f8f8f] shadow-[0_1px_1px_rgba(23,23,23,0.02)] md:flex"
+                        >
+                            <FiSearch className="text-base" aria-hidden="true" />
+                            <span className="sr-only">Tìm kiếm sản phẩm</span>
                             <input
-                                type="text"
-                                placeholder="Search"
+                                id="header-search"
+                                type="search"
+                                placeholder="Tìm kiếm"
                                 className="w-full border-none bg-transparent text-[#171717] placeholder:text-[#8f8f8f] focus:outline-none"
                             />
                         </label>
@@ -74,13 +78,13 @@ export function Header() {
                     <div className="mt-3 border-t border-[#ebebeb] pt-3 md:hidden">
                         <nav className="flex flex-col gap-1">
                             {navItems.map((item) => (
-                                <a
+                                <Link
                                     key={`${item.label}-${item.href}`}
-                                    href={item.href}
+                                    to={item.href}
                                     className="rounded-2xl px-3 py-3 text-base font-medium text-[#171717] transition hover:bg-[#f2f2f2]"
                                 >
                                     {item.label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
 

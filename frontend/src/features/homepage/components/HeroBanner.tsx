@@ -135,10 +135,10 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
 
                     <div ref={actionsRef} className="mt-8 flex flex-wrap items-center gap-3">
                         <button className="rounded-full bg-[#171717] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#2b2b2b] sm:px-7">
-                            Shop now
+                            Mua ngay
                         </button>
                         <button className="rounded-full border border-[#171717] bg-white px-6 py-3 text-sm font-medium text-[#171717] transition hover:bg-[#f5f5f5] sm:px-7">
-                            Explore
+                            Khám phá
                         </button>
                     </div>
 
@@ -147,7 +147,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                             type="button"
                             onClick={handlePrev}
                             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] transition hover:border-[#171717] disabled:cursor-not-allowed disabled:opacity-50"
-                            aria-label="Previous slide"
+                            aria-label="Slide trước"
                         >
                             <FiChevronLeft />
                         </button>
@@ -155,7 +155,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                             type="button"
                             onClick={handleNext}
                             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] transition hover:border-[#171717] disabled:cursor-not-allowed disabled:opacity-50"
-                            aria-label="Next slide"
+                            aria-label="Slide tiếp theo"
                         >
                             <FiChevronRight />
                         </button>
@@ -171,7 +171,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                                             ? "w-10 bg-[#171717]"
                                             : "w-2.5 bg-[#d9d9d9] hover:bg-[#8f8f8f]",
                                     ].join(" ")}
-                                    aria-label={`Go to slide ${index + 1}`}
+                                    aria-label={`Chuyển đến slide ${index + 1}`}
                                 />
                             ))}
                         </div>

@@ -54,14 +54,14 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                        Shop by style
+                        Mua theo phong cách
                     </p>
                     <h2 className="mt-2 text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
                         {title}
                     </h2>
                 </div>
                 <button className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]">
-                    Browse all
+                    Xem tất cả
                 </button>
             </div>
 

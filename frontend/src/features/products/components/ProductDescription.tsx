@@ -3,9 +3,9 @@ import type { ProductListItem } from "../data/productsData";
 
 export function ProductDescription({ product }: { product: ProductListItem }) {
     const details = [
-        "Structured design with a relaxed, wearable fit.",
-        "Premium fabric blend for breathability and softness.",
-        "Crafted for layering across seasons and everyday styling.",
+        "Thiết kế có cấu trúc với form dáng thoải mái, dễ mặc.",
+        "Vải cao cấp pha trộn giúp thoáng khí và mềm mại.",
+        "Phù hợp để mix layer qua nhiều mùa và phong cách hàng ngày.",
     ];
 
     return (
@@ -13,10 +13,10 @@ export function ProductDescription({ product }: { product: ProductListItem }) {
             <div className="flex flex-col gap-4 border-b border-[#ebebeb] pb-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                        Product details
+                        Chi tiết sản phẩm
                     </p>
                     <h2 className="mt-2 text-2xl font-medium tracking-tighter text-[#171717]">
-                        Built for everyday movement
+                        Thiết kế cho vận động hàng ngày
                     </h2>
                 </div>
                 <div className="rounded-full border border-[#ebebeb] bg-[#fafafa] px-3 py-2 text-sm text-[#4d4d4d]">
@@ -27,13 +27,11 @@ export function ProductDescription({ product }: { product: ProductListItem }) {
             <div className="mt-6 grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
                 <div className="space-y-5">
                     <p className="text-base leading-7 text-[#4d4d4d]">
-                        A refined everyday essential designed with quiet confidence and subtle structure.
-                        Crafted to feel polished enough for city days while remaining easy and effortless for
-                        everyday wear.
+                        Một món đồ cơ bản tinh tế cho mỗi ngày, được thiết kế với sự tự tin thầm lặng và cấu trúc khéo léo.
+                        Tạo ra để trông chỉn chu trong những ngày bận rộn ở thành phố nhưng vẫn thoải mái và dễ chịu cho sinh hoạt thường ngày.
                     </p>
                     <p className="text-base leading-7 text-[#4d4d4d]">
-                        The silhouette balances clean lines and relaxed comfort, making it a versatile piece
-                        that works layered, dressed up, or styled simply with the rest of your wardrobe.
+                        Silhouette cân bằng giữa đường nét gọn gàng và sự thoải mái, tạo nên một món đồ linh hoạt có thể mặc layered, sang trọng hoặc đơn giản kết hợp với phần còn lại của tủ quần áo.
                     </p>
                 </div>
 

@@ -25,17 +25,17 @@ export function SimilarProducts() {
             <div className="flex items-center justify-between gap-3">
                 <div>
                     <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                        Similar items
+                        Sản phẩm tương tự
                     </p>
                     <h2 className="mt-2 text-2xl font-medium tracking-tighter text-[#171717]">
-                        Curated for you
+                        Gợi ý cho bạn
                     </h2>
                 </div>
                 <Link
                     to="/products"
                     className="inline-flex items-center gap-2 text-sm font-medium text-[#171717] underline-offset-4 hover:underline"
                 >
-                    View all <FiChevronRight className="text-base" />
+                    Xem tất cả <FiChevronRight className="text-base" />
                 </Link>
             </div>
 
@@ -55,7 +55,7 @@ export function SimilarProducts() {
                                 className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
                             />
                             <div className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.14em] text-[#171717]">
-                                {item.status === "new" ? "New" : "Pick"}
+                                {item.status === "new" ? "Mới" : "Nổi bật"}
                             </div>
                         </div>
 

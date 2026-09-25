@@ -1,64 +1,36 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiChevronRight, FiMinus, FiPlus, FiShoppingBag, FiTrash2 } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { Footer } from "../../homepage/components/Footer";
-import { Header } from "../../homepage/components/Header";
-import { productListItems } from "../../products/data/productsData";
+import { AppLayout } from "../../../shared/layouts/AppLayout";
+import { useCartStore } from "../store/cartStore";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const cartSeed = [
-    { id: 1, quantity: 1 },
-    { id: 2, quantity: 2 },
-    { id: 4, quantity: 1 },
-];
 
 export function CartPage() {
     const pageRef = useRef<HTMLDivElement | null>(null);
     const navigate = useNavigate();
     const [promoCode, setPromoCode] = useState("");
     const [appliedPromo, setAppliedPromo] = useState(false);
-    const [cartItems, setCartItems] = useState(() =>
-        cartSeed
-            .map(({ id, quantity }) => {
-                const item = productListItems.find((product) => product.id === id);
-                return item ? { ...item, quantity } : null;
-            })
-            .filter((item): item is (typeof productListItems)[number] & { quantity: number } => Boolean(item)),
-    );
+    const { items: cartItems, removeItem, updateQuantity, subtotal: getSubtotal } = useCartStore();
 
-    const updateQuantity = (productId: number, change: number) => {
-        setCartItems((currentItems) =>
-            currentItems.flatMap((item) => {
-                if (item.id !== productId) {
-                    return [item];
-                }
-
-                const nextQuantity = item.quantity + change;
-                return nextQuantity <= 0 ? [] : [{ ...item, quantity: nextQuantity }];
-            }),
-        );
-    };
-
-    const removeItem = (productId: number) => {
-        setCartItems((currentItems) => currentItems.filter((item) => item.id !== productId));
-    };
-
-    const subtotal = useMemo(
-        () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-        [cartItems],
-    );
+    const subtotal = getSubtotal();
 
     const shipping = subtotal > 300 ? 0 : 24;
     const discount = appliedPromo ? subtotal * 0.1 : 0;
     const total = Math.max(subtotal + shipping - discount, 0);
 
     useEffect(() => {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const sections = gsap.utils.toArray<HTMLElement>("[data-cart-animate]");
 
         const ctx = gsap.context(() => {
+            if (prefersReducedMotion) {
+                sections.forEach((section) => gsap.set(section, { opacity: 1, y: 0, filter: "blur(0px)" }));
+                return;
+            }
+
             sections.forEach((section) => {
                 gsap.fromTo(
                     section,
@@ -86,28 +58,27 @@ export function CartPage() {
     }, []);
 
     return (
-        <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
-            <Header />
-
-            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+        <AppLayout>
+            <div ref={pageRef} className="min-h-screen bg-[#fafafa] text-[#171717]">
+                <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
                 <nav className="mb-8 flex items-center gap-2 text-sm text-[#8f8f8f]">
                     <Link to="/" className="transition hover:text-[#171717]">
-                        Home
+                        Trang chủ
                     </Link>
                     <FiChevronRight className="text-base" />
-                    <span className="text-[#171717]">Cart</span>
+                    <span className="text-[#171717]">Giỏ hàng</span>
                 </nav>
 
                 <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                         <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8f8f8f]">
-                            Bag
+                            Túi hàng
                         </p>
                         <h1 className="mt-2 text-3xl font-medium tracking-[-0.06em] text-[#171717] sm:text-4xl">
-                            Your cart
+                            Giỏ hàng của bạn
                         </h1>
                     </div>
-                    <p className="text-sm text-[#4d4d4d]">{cartItems.length} items</p>
+                    <p className="text-sm text-[#4d4d4d]">{cartItems.length} sản phẩm</p>
                 </div>
 
                 <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
@@ -143,10 +114,10 @@ export function CartPage() {
                                             type="button"
                                             onClick={() => removeItem(item.id)}
                                             className="inline-flex items-center gap-2 text-sm font-medium text-[#171717] transition hover:text-[#4d4d4d]"
-                                            aria-label={`Remove ${item.name}`}
+                                            aria-label={`Xóa ${item.name}`}
                                         >
                                             <FiTrash2 className="text-base" />
-                                            Remove
+                                            Xóa
                                         </button>
                                     </div>
 
@@ -156,7 +127,7 @@ export function CartPage() {
                                                 type="button"
                                                 onClick={() => updateQuantity(item.id, -1)}
                                                 className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#171717] transition hover:bg-white"
-                                                aria-label={`Decrease quantity for ${item.name}`}
+                                                aria-label={`Giảm số lượng ${item.name}`}
                                             >
                                                 <FiMinus className="text-sm" />
                                             </button>
@@ -167,7 +138,7 @@ export function CartPage() {
                                                 type="button"
                                                 onClick={() => updateQuantity(item.id, 1)}
                                                 className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#171717] transition hover:bg-white"
-                                                aria-label={`Increase quantity for ${item.name}`}
+                                                aria-label={`Tăng số lượng ${item.name}`}
                                             >
                                                 <FiPlus className="text-sm" />
                                             </button>
@@ -197,25 +168,25 @@ export function CartPage() {
                                 </div>
                                 <div>
                                     <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8f8f8f]">
-                                        Summary
+                                        Tóm tắt
                                     </p>
-                                    <h3 className="mt-1 text-xl font-medium text-[#171717]">Order total</h3>
+                                    <h3 className="mt-1 text-xl font-medium text-[#171717]">Tổng đơn hàng</h3>
                                 </div>
                             </div>
 
                             <div className="mt-6 space-y-3 text-sm text-[#4d4d4d]">
                                 <div className="flex items-center justify-between">
-                                    <span>Subtotal</span>
+                                    <span>Tạm tính</span>
                                     <span className="font-medium text-[#171717]">${subtotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span>Shipping</span>
+                                    <span>Vận chuyển</span>
                                     <span className="font-medium text-[#171717]">
-                                        {shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}
+                                        {shipping === 0 ? "Miễn phí" : `$${shipping.toFixed(2)}`}
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <span>Discount</span>
+                                    <span>Giảm giá</span>
                                     <span className="font-medium text-[#171717]">
                                         {discount > 0 ? `-$${discount.toFixed(2)}` : "$0.00"}
                                     </span>
@@ -224,7 +195,7 @@ export function CartPage() {
 
                             <div className="mt-5 rounded-2xl border border-[#ebebeb] bg-[#fafafa] p-3">
                                 <label className="block text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                                    Discount code
+                                    Mã giảm giá
                                 </label>
                                 <div className="mt-3 flex gap-2">
                                     <input
@@ -239,13 +210,13 @@ export function CartPage() {
                                         onClick={() => setAppliedPromo(promoCode.trim().toUpperCase() === "SAVE10")}
                                         className="rounded-full bg-[#171717] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#2b2b2b]"
                                     >
-                                        Apply
+                                        Áp dụng
                                     </button>
                                 </div>
                             </div>
 
                             <div className="mt-6 flex items-center justify-between border-t border-[#ebebeb] pt-5">
-                                <span className="text-lg font-medium text-[#171717]">Total</span>
+                                <span className="text-lg font-medium text-[#171717]">Tổng cộng</span>
                                 <span className="text-2xl font-semibold tracking-tighter text-[#171717]">
                                     ${total.toFixed(2)}
                                 </span>
@@ -256,15 +227,14 @@ export function CartPage() {
                                 onClick={() => navigate("/checkout")}
                                 className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#171717] px-5 py-3.5 text-sm font-medium text-white transition hover:bg-[#2b2b2b]"
                             >
-                                Proceed to checkout
+                                Tiến hành thanh toán
                                 <FiChevronRight className="text-base text-white" />
                             </button>
                         </div>
                     </aside>
                 </div>
-            </main>
-
-            <Footer />
-        </div>
+                </main>
+            </div>
+        </AppLayout>
     );
 }

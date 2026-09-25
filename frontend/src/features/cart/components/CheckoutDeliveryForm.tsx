@@ -8,25 +8,25 @@ export function CheckoutDeliveryForm() {
         >
             <div>
                 <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8f8f8f]">
-                    Delivery
+                    Giao hàng
                 </p>
                 <h1 className="mt-2 text-3xl font-medium tracking-[-0.06em] text-[#171717]">
-                    Checkout details
+                    Thông tin đặt hàng
                 </h1>
             </div>
 
             <div className="mt-8 space-y-5">
                 <div className="grid gap-4 sm:grid-cols-2">
-                    <CheckoutField label="First name" value="Olivia" />
-                    <CheckoutField label="Last name" value="Nguyen" />
+                    <CheckoutField label="Họ" value="Nguyễn" />
+                    <CheckoutField label="Tên" value="Olivia" />
                 </div>
                 <CheckoutField label="Email" value="olivia@email.com" />
-                <CheckoutField label="Address" value="17 Le Thi Rieng, District 1" />
+                <CheckoutField label="Địa chỉ" value="17 Lê Thị Riêng, Quận 1" />
                 <div className="grid gap-4 sm:grid-cols-2">
-                    <CheckoutField label="City" value="Ho Chi Minh City" />
-                    <CheckoutField label="Postal code" value="70000" />
+                    <CheckoutField label="Thành phố" value="TP. Hồ Chí Minh" />
+                    <CheckoutField label="Mã bưu chính" value="70000" />
                 </div>
-                <CheckoutField label="Country" value="Vietnam" />
+                <CheckoutField label="Quốc gia" value="Việt Nam" />
             </div>
         </section>
     );

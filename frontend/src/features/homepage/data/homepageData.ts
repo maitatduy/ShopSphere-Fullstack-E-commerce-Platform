@@ -29,31 +29,31 @@ export type CategoryBlock = {
 export const heroSlides: HeroSlide[] = [
     {
         id: 1,
-        eyebrow: "AUTUMN 2026",
-        title: "Minimal layers for everyday movement.",
-        subtitle: "Essential silhouettes",
+        eyebrow: "THU ĐÔNG 2026",
+        title: "Những lớp tối giản cho chuyển động mỗi ngày.",
+        subtitle: "Thiết kế cơ bản",
         description:
-            "Modern staples designed for thought-through comfort, elevated textures, and all-day versatility.",
+            "Những món đồ hiện đại được thiết kế cho sự thoải mái, chất liệu cao cấp và tính linh hoạt suốt cả ngày.",
         image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
         accent: "from-cyan-400 via-blue-500 to-violet-500",
     },
     {
         id: 2,
-        eyebrow: "NEW DROP",
-        title: "Quiet luxury meets city energy.",
-        subtitle: "Soft structure",
+        eyebrow: "BỘ SƯU TẬP MỚI",
+        title: "Sang trọng tinh tế gặp gỡ năng lượng đô thị.",
+        subtitle: "Cấu trúc mềm mại",
         description:
-            "Refined tailoring, warm neutrals, and sharp layering for colder mornings and brighter afternoons.",
+            "May đo tinh tế, tông màu trung tính ấm áp và layering sắc sảo cho những buổi sáng lạnh và chiều tươi sáng.",
         image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
         accent: "from-violet-500 via-fuchsia-500 to-amber-400",
     },
     {
         id: 3,
-        eyebrow: "CURATED EDIT",
-        title: "Build a sharper wardrobe in seconds.",
-        subtitle: "Shop the capsule",
+        eyebrow: "TUYỂN CHỌN ĐẶC BIỆT",
+        title: "Xây dựng tủ đồ sắc sảo hơn trong tích tắc.",
+        subtitle: "Mua capsule collection",
         description:
-            "From oversized layers to elevated essentials, every piece is created to mix, match, and move.",
+            "Từ những lớp oversized đến những món đồ tinh tế, mỗi sản phẩm được tạo ra để phối, mix và di chuyển tự do.",
         image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
         accent: "from-sky-400 via-cyan-400 to-emerald-400",
     },
@@ -100,7 +100,7 @@ export const newArrivals: Product[] = [
 export const menCategories: CategoryBlock[] = [
     {
         id: 1,
-        title: "Outerwear",
+        title: "Áo khoác ngoài",
         subtitle: "Layered essentials",
         image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
         href: "/men/outerwear",
@@ -114,7 +114,7 @@ export const menCategories: CategoryBlock[] = [
     },
     {
         id: 3,
-        title: "Accessories",
+        title: "Phụ kiện",
         subtitle: "Complete the look",
         image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=80",
         href: "/men/accessories",
@@ -124,21 +124,21 @@ export const menCategories: CategoryBlock[] = [
 export const womenCategories: CategoryBlock[] = [
     {
         id: 1,
-        title: "Dresses",
+        title: "Váy đầm",
         subtitle: "Modern lines",
         image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80",
         href: "/women/dresses",
     },
     {
         id: 2,
-        title: "Knitwear",
+        title: "Len dệt kim",
         subtitle: "Soft textures",
         image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80",
         href: "/women/knitwear",
     },
     {
         id: 3,
-        title: "Bags",
+        title: "Túi xách",
         subtitle: "Polished carryalls",
         image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80",
         href: "/women/bags",
