@@ -168,7 +168,7 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
                             alt={slide.title}
                             loading="eager"
                             decoding="async"
-                            className="h-52 w-full rounded-xl object-cover sm:h-72 sm:rounded-2xl lg:h-[28rem] lg:rounded-[1.3rem]"
+                            className="h-52 w-full rounded-xl object-cover sm:h-72 sm:rounded-2xl lg:h-112 lg:rounded-[1.3rem]"
                         />
                     </div>
                 </div>

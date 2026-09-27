@@ -71,89 +71,81 @@ export function CartPage() {
                         <span className="text-[#171717]">Giỏ hàng</span>
                     </nav>
 
-                    <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                        <div>
-                            <h1 className="text-3xl font-medium tracking-[-0.06em] text-[#171717] sm:text-4xl">
-                                Giỏ hàng của bạn
-                            </h1>
-                        </div>
-                        <p className="text-sm text-[#4d4d4d]">{cartItems.length} sản phẩm</p>
+                    <div className="mb-6 flex items-center justify-between">
+                        <h1 className="text-2xl font-medium tracking-tighter text-[#171717] sm:text-3xl">
+                            Giỏ hàng
+                        </h1>
+                        <p className="text-sm text-[#8f8f8f]">{cartItems.length} sản phẩm</p>
                     </div>
 
-                    <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
-                        <section data-cart-animate className="space-y-5">
+                    <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
+                        <section data-cart-animate className="space-y-4">
                             {cartItems.map((item) => (
                                 <article
                                     key={item.id}
-                                    className="flex flex-col gap-4 rounded-4xl border border-[#ebebeb] bg-white p-4 shadow-[0_16px_40px_rgba(23,23,23,0.02)] sm:flex-row sm:items-center"
+                                    className="flex gap-4 rounded-3xl border border-[#ebebeb] bg-white p-4 shadow-[0_4px_16px_rgba(23,23,23,0.03)]"
                                 >
-                                    <div className="relative overflow-hidden rounded-[1.4rem] bg-[#f5f5f5] sm:w-36">
+                                    <div className="relative shrink-0 overflow-hidden rounded-2xl bg-[#f5f5f5]">
                                         <img
                                             src={item.image}
                                             alt={item.name}
                                             loading="lazy"
-                                            className="h-32 w-full object-cover sm:h-28"
+                                            className="h-24 w-24 object-cover sm:h-28 sm:w-28"
                                         />
                                     </div>
 
-                                    <div className="flex-1">
-                                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                                            <div>
-                                                <div className="flex items-center gap-2 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                                                    <span>{item.category}</span>
-                                                    <span>•</span>
-                                                    <span>{item.color}</span>
-                                                </div>
-                                                <h2 className="mt-2 text-xl font-medium text-[#171717]">
+                                    <div className="flex min-w-0 flex-1 flex-col justify-between">
+                                        <div className="flex items-start justify-between gap-2">
+                                            <div className="min-w-0">
+                                                <p className="text-[0.65rem] uppercase tracking-[0.14em] text-[#8f8f8f]">
+                                                    {item.category}
+                                                </p>
+                                                <h2 className="mt-0.5 truncate text-base font-medium text-[#171717] sm:text-lg">
                                                     {item.name}
                                                 </h2>
+                                                {item.color ? (
+                                                    <p className="mt-0.5 text-xs text-[#8f8f8f]">{item.color}</p>
+                                                ) : null}
                                             </div>
-
                                             <button
                                                 type="button"
                                                 onClick={() => removeItem(item.id)}
-                                                className="inline-flex items-center gap-2 text-sm font-medium text-[#171717] transition hover:text-[#4d4d4d]"
+                                                className="shrink-0 p-1 text-[#c0c0c0] transition hover:text-[#171717]"
                                                 aria-label={`Xóa ${item.name}`}
                                             >
                                                 <FiTrash2 className="text-base" />
-                                                Xóa
                                             </button>
                                         </div>
 
-                                        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                                            <div className="inline-flex items-center rounded-full border border-[#ebebeb] bg-[#fafafa] p-1">
+                                        <div className="mt-3 flex items-center justify-between gap-2">
+                                            <div className="inline-flex items-center rounded-full border border-[#ebebeb] bg-[#fafafa] p-0.5">
                                                 <button
                                                     type="button"
                                                     onClick={() => updateQuantity(item.id, -1)}
-                                                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#171717] transition hover:bg-white"
-                                                    aria-label={`Giảm số lượng ${item.name}`}
+                                                    className="inline-flex h-7 w-7 items-center justify-center rounded-full text-[#171717] transition hover:bg-white"
+                                                    aria-label={`Giảm số lượng`}
                                                 >
-                                                    <FiMinus className="text-sm" />
+                                                    <FiMinus className="text-xs" />
                                                 </button>
-                                                <span className="min-w-10 text-center text-sm font-medium text-[#171717]">
+                                                <span className="min-w-8 text-center text-sm font-medium text-[#171717]">
                                                     {item.quantity}
                                                 </span>
                                                 <button
                                                     type="button"
                                                     onClick={() => updateQuantity(item.id, 1)}
-                                                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#171717] transition hover:bg-white"
-                                                    aria-label={`Tăng số lượng ${item.name}`}
+                                                    className="inline-flex h-7 w-7 items-center justify-center rounded-full text-[#171717] transition hover:bg-white"
+                                                    aria-label={`Tăng số lượng`}
                                                 >
-                                                    <FiPlus className="text-sm" />
+                                                    <FiPlus className="text-xs" />
                                                 </button>
                                             </div>
-
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-xl font-semibold text-[#171717]">
+                                            <div className="flex items-baseline gap-2">
+                                                <span className="text-base font-semibold text-[#171717] sm:text-lg">
                                                     ${(item.price * item.quantity).toFixed(2)}
                                                 </span>
                                                 {item.oldPrice ? (
-                                                    <span className="text-sm text-[#8f8f8f] line-through">
-                                                        $
-                                                        {(
-                                                            (item.oldPrice ?? item.price) *
-                                                            item.quantity
-                                                        ).toFixed(2)}
+                                                    <span className="text-xs text-[#8f8f8f] line-through">
+                                                        ${((item.oldPrice ?? item.price) * item.quantity).toFixed(2)}
                                                     </span>
                                                 ) : null}
                                             </div>
@@ -196,13 +188,13 @@ export function CartPage() {
 
                                 <div className="mt-5 border-t border-[#f1f1f1] pt-5">
                                     <p className="mb-2.5 text-sm text-[#4d4d4d]">Mã giảm giá</p>
-                                    <div className="flex gap-2">
+                                    <div className="flex flex-col gap-2">
                                         <input
                                             type="text"
                                             value={promoCode}
                                             onChange={(event) => setPromoCode(event.target.value)}
                                             placeholder="Nhập mã..."
-                                            className="min-w-0 flex-1 rounded-2xl border border-[#ebebeb] bg-[#fafafa] px-4 py-2.5 text-sm text-[#171717] placeholder:text-[#b3b3b3] focus:border-[#171717] focus:bg-white focus:outline-none transition"
+                                            className="w-full rounded-2xl border border-[#ebebeb] bg-[#fafafa] px-4 py-2.5 text-sm text-[#171717] placeholder:text-[#b3b3b3] focus:border-[#171717] focus:bg-white focus:outline-none transition"
                                         />
                                         <button
                                             type="button"
@@ -211,7 +203,7 @@ export function CartPage() {
                                                     promoCode.trim().toUpperCase() === "SAVE10",
                                                 )
                                             }
-                                            className="shrink-0 rounded-2xl border border-[#171717] bg-white px-4 py-2.5 text-sm font-medium text-[#171717] transition hover:bg-[#171717] hover:text-white"
+                                            className="w-full rounded-2xl border border-[#171717] bg-white px-4 py-2.5 text-sm font-medium text-[#171717] transition hover:bg-[#171717] hover:text-white"
                                         >
                                             Áp dụng
                                         </button>

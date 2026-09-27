@@ -32,7 +32,7 @@ export function ProductListPage() {
     const [onlyNew, setOnlyNew] = useState(false);
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [isFilterOpen, setIsFilterOpen] = useState(true);
+    const [isFilterOpen, setIsFilterOpen] = useState(() => window.innerWidth >= 1024);
 
     const categoryId = searchParams.get("category") ?? undefined;
 
