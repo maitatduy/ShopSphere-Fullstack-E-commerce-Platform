@@ -5,11 +5,15 @@ export const HomePage = lazy(() =>
 );
 
 export const ProductListPage = lazy(() =>
-    import("../features/products/pages/ProductListPage").then((m) => ({ default: m.ProductListPage })),
+    import("../features/products/pages/ProductListPage").then((m) => ({
+        default: m.ProductListPage,
+    })),
 );
 
 export const ProductDetailPage = lazy(() =>
-    import("../features/products/pages/ProductDetailPage").then((m) => ({ default: m.ProductDetailPage })),
+    import("../features/products/pages/ProductDetailPage").then((m) => ({
+        default: m.ProductDetailPage,
+    })),
 );
 
 export const CartPage = lazy(() =>

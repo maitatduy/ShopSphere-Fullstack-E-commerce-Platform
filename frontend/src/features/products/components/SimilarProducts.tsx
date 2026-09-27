@@ -1,24 +1,31 @@
+import { useEffect, useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { productListItems } from "../data/productsData";
+import { Link, useNavigate } from "react-router-dom";
+import { productService } from "../services/productService";
+import type { Product } from "../types";
 
-const productToneMap: Record<string, string> = {
-    Sand: "bg-stone-100",
-    Ivory: "bg-amber-50",
-    Cocoa: "bg-rose-50",
-    Charcoal: "bg-slate-100",
-    Black: "bg-zinc-100",
-    Olive: "bg-emerald-50",
-    Sky: "bg-cyan-50",
-    Rose: "bg-rose-50",
-    Lilac: "bg-violet-50",
-    Terracotta: "bg-orange-50",
-    Stone: "bg-stone-100",
-    Navy: "bg-sky-50",
+type SimilarProductsProps = {
+    categoryId?: string;
+    excludeId?: string;
 };
 
-export function SimilarProducts() {
-    const items = productListItems.slice(0, 4);
+export function SimilarProducts({ categoryId, excludeId }: SimilarProductsProps) {
+    const navigate = useNavigate();
+    const [items, setItems] = useState<Product[]>([]);
+
+    useEffect(() => {
+        productService
+            .getProducts({ categoryId, size: 8, sort: "createdAt,desc" })
+            .then((data) => {
+                const filtered = excludeId
+                    ? data.content.filter((p) => p.id !== excludeId)
+                    : data.content;
+                setItems(filtered.slice(0, 4));
+            })
+            .catch(() => setItems([]));
+    }, [categoryId, excludeId]);
+
+    if (items.length === 0) return null;
 
     return (
         <section data-product-detail-animate className="space-y-6">
@@ -41,38 +48,35 @@ export function SimilarProducts() {
 
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 {items.map((item) => (
-                    <Link
+                    <article
                         key={item.id}
-                        to={`/products/${item.id}`}
-                        className="group overflow-hidden rounded-[1.6rem] border border-[#ebebeb] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(23,23,23,0.06)]"
+                        onClick={() => navigate(`/products/${item.id}`)}
+                        className="group cursor-pointer overflow-hidden rounded-[1.6rem] border border-[#ebebeb] bg-white transition hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(23,23,23,0.06)]"
                     >
-                        <div className={`relative overflow-hidden ${productToneMap[item.color] ?? "bg-stone-100"}`}>
-                            <img
-                                src={item.image}
-                                alt={item.name}
-                                loading="lazy"
-                                decoding="async"
-                                className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
-                            />
-                            <div className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.14em] text-[#171717]">
-                                {item.status === "new" ? "Mới" : "Nổi bật"}
+                        <div className="relative overflow-hidden bg-[#f5f5f5]">
+                            <div className="flex h-72 w-full items-center justify-center text-sm text-[#8f8f8f]">
+                                {item.name}
                             </div>
+                            {item.newArrival ? (
+                                <div className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[0.6rem] font-medium uppercase tracking-[0.14em] text-[#171717]">
+                                    Mới
+                                </div>
+                            ) : null}
                         </div>
 
                         <div className="space-y-3 p-4">
                             <div className="flex items-center justify-between gap-2 text-[0.62rem] uppercase tracking-[0.14em] text-[#8f8f8f]">
-                                <span>{item.category}</span>
-                                <span>{item.color}</span>
+                                <span>{item.categoryName}</span>
+                                <span>{item.brand}</span>
                             </div>
                             <h3 className="text-lg font-medium text-[#171717]">{item.name}</h3>
-                            <div className="flex items-center justify-between gap-2">
-                                <span className="text-lg font-semibold text-[#171717]">${item.price}</span>
-                                {item.oldPrice ? (
-                                    <span className="text-sm text-[#8f8f8f] line-through">${item.oldPrice}</span>
-                                ) : null}
+                            <div className="flex items-center gap-2">
+                                <span className="text-lg font-semibold text-[#171717]">
+                                    ${item.price}
+                                </span>
                             </div>
                         </div>
-                    </Link>
+                    </article>
                 ))}
             </div>
         </section>

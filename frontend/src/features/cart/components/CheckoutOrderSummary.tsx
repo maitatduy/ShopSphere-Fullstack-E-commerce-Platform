@@ -1,30 +1,41 @@
+import { useCartStore } from "../store/cartStore";
 import { SummaryRow } from "./SummaryRow";
 
 export function CheckoutOrderSummary() {
+    const { items, subtotal: getSubtotal } = useCartStore();
+    const subtotal = getSubtotal();
+    const shipping = subtotal > 300 ? 0 : 24;
+    const total = subtotal + shipping;
+
     return (
         <aside
             data-checkout-animate
             className="rounded-4xl border border-[#ebebeb] bg-white p-6 shadow-[0_16px_40px_rgba(23,23,23,0.03)]"
         >
-            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#8f8f8f]">
-                Tóm tắt đơn hàng
-            </p>
+            <h2 className="text-xl font-medium text-[#171717]">Đơn hàng</h2>
+
             <div className="mt-6 space-y-4">
-                <SummaryRow label="Aero Knit Jacket" value="$138.00" />
-                <SummaryRow label="Lune Wool Coat x2" value="$392.00" />
-                <SummaryRow label="Monarch Overshirt" value="$126.00" />
+                {items.map((item) => (
+                    <SummaryRow
+                        key={item.id}
+                        label={item.quantity > 1 ? `${item.name} x${item.quantity}` : item.name}
+                        value={`$${(item.price * item.quantity).toFixed(2)}`}
+                    />
+                ))}
             </div>
 
             <div className="mt-6 space-y-3 border-t border-[#ebebeb] pt-5 text-sm text-[#4d4d4d]">
-                <SummaryRow label="Tạm tính" value="$656.00" />
-                <SummaryRow label="Vận chuyển" value="Miễn phí" />
-                <SummaryRow label="Giảm giá" value="-$65.60" />
+                <SummaryRow label="Tạm tính" value={`$${subtotal.toFixed(2)}`} />
+                <SummaryRow
+                    label="Vận chuyển"
+                    value={shipping === 0 ? "Miễn phí" : `$${shipping.toFixed(2)}`}
+                />
             </div>
 
             <div className="mt-6 flex items-center justify-between border-t border-[#ebebeb] pt-5">
                 <span className="text-lg font-medium text-[#171717]">Tổng cộng</span>
                 <span className="text-2xl font-semibold tracking-tighter text-[#171717]">
-                    $590.40
+                    ${total.toFixed(2)}
                 </span>
             </div>
 

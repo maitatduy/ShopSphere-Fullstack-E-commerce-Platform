@@ -2,37 +2,35 @@ import axiosInstance from "../../lib/axios";
 
 export type QueryParams = Record<string, string | number | undefined>;
 
-export type ApiListResponse<T> = {
-    content?: T[];
-    items?: T[];
-    data?: T[];
-    totalElements?: number;
-    totalPages?: number;
-    page?: number;
-    size?: number;
+export type ApiResponse<T> = {
+    code: number;
+    message: string;
+    data: T;
 };
 
-export const normalizeList = <T>(payload: unknown): T[] => {
-    if (Array.isArray(payload)) {
-        return payload as T[];
-    }
-
-    const data = payload as ApiListResponse<T> | null;
-
-    if (!data) {
-        return [];
-    }
-
-    if (Array.isArray(data.content)) return data.content;
-    if (Array.isArray(data.items)) return data.items;
-    if (Array.isArray(data.data)) return data.data;
-
-    return [];
+export type PageData<T> = {
+    content: T[];
+    totalElements: number;
+    totalPages: number;
+    number: number;
+    size: number;
 };
 
 export const apiClient = {
-    get: <T>(url: string, params?: QueryParams) => axiosInstance.get<T>(url, { params }),
-    post: <T>(url: string, body: unknown) => axiosInstance.post<T>(url, body),
-    put: <T>(url: string, body: unknown) => axiosInstance.put<T>(url, body),
-    del: <T>(url: string) => axiosInstance.delete<T>(url),
+    get: async <T>(url: string, params?: QueryParams): Promise<T> => {
+        const response = await axiosInstance.get<ApiResponse<T>>(url, { params });
+        return response.data.data;
+    },
+    post: async <T>(url: string, body: unknown): Promise<T> => {
+        const response = await axiosInstance.post<ApiResponse<T>>(url, body);
+        return response.data.data;
+    },
+    put: async <T>(url: string, body: unknown): Promise<T> => {
+        const response = await axiosInstance.put<ApiResponse<T>>(url, body);
+        return response.data.data;
+    },
+    del: async <T>(url: string): Promise<T> => {
+        const response = await axiosInstance.delete<ApiResponse<T>>(url);
+        return response.data.data;
+    },
 };

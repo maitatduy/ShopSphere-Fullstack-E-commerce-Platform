@@ -1,12 +1,20 @@
 import { gsap } from "gsap";
-import type { CategoryBlock } from "../data/homepageData";
+
+type CategoryBlock = {
+    id: string | number;
+    title: string;
+    subtitle: string;
+    image: string;
+    href: string;
+};
 
 type CategoryShowcaseProps = {
     title: string;
     items: CategoryBlock[];
+    onViewAll?: () => void;
 };
 
-export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
+export function CategoryShowcase({ title, items, onViewAll }: CategoryShowcaseProps) {
     const handleCardEnter = (event: React.MouseEvent<HTMLElement>) => {
         const card = event.currentTarget;
         const image = card.querySelector("img");
@@ -57,7 +65,11 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
                         {title}
                     </h2>
                 </div>
-                <button className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]">
+                <button
+                    type="button"
+                    onClick={onViewAll}
+                    className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]"
+                >
                     Xem tất cả
                 </button>
             </div>
@@ -76,7 +88,7 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
                                 alt={item.title}
                                 loading="lazy"
                                 decoding="async"
-                                className="h-76 w-full object-cover transition duration-500 sm:h-88 lg:h-96"
+                                className="h-56 w-full object-cover transition duration-500 sm:h-72 lg:h-80"
                             />
                         </div>
                         <div className="space-y-2 p-5">

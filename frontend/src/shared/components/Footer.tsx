@@ -10,9 +10,7 @@ export function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
-                            Mua sắm
-                        </h3>
+                        <h3 className="text-sm font-semibold text-[#171717]">Mua sắm</h3>
                         <ul className="mt-4 space-y-3 text-sm text-[#4d4d4d]">
                             <li>Hàng mới về</li>
                             <li>Nam</li>
@@ -22,9 +20,7 @@ export function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
-                            Về chúng tôi
-                        </h3>
+                        <h3 className="text-sm font-semibold text-[#171717]">Về chúng tôi</h3>
                         <ul className="mt-4 space-y-3 text-sm text-[#4d4d4d]">
                             <li>Giới thiệu</li>
                             <li>Blog</li>
@@ -34,9 +30,7 @@ export function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#171717]">
-                            Theo dõi
-                        </h3>
+                        <h3 className="text-sm font-semibold text-[#171717]">Theo dõi</h3>
                         <ul className="mt-4 space-y-3 text-sm text-[#4d4d4d]">
                             <li>Instagram</li>
                             <li>Pinterest</li>
