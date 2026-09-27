@@ -1,15 +1,12 @@
 export function Footer() {
     return (
         <footer data-homepage-animate className="border-t border-[#ebebeb] bg-[#fafafa]">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
                 <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.3fr_0.7fr_0.7fr_0.8fr]">
                     <div>
                         <div className="text-[1.8rem] font-semibold tracking-[-0.08em] text-[#171717]">
                             ShopSphere
                         </div>
-                        <p className="mt-4 max-w-xs text-sm leading-6 text-[#4d4d4d]">
-                            Premium essentials for a sharper everyday wardrobe, built to move with you.
-                        </p>
                     </div>
 
                     <div>

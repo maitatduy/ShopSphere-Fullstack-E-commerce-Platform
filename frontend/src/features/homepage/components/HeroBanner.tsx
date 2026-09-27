@@ -108,32 +108,20 @@ export function HeroBanner({ slides, activeIndex, onNext, onPrev, onSelect }: He
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(80,227,194,0.22),transparent_26%),radial-gradient(circle_at_top_right,rgba(121,40,202,0.18),transparent_30%),radial-gradient(circle_at_bottom,rgba(255,0,128,0.12),transparent_35%)]" />
             <div className="relative mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 lg:px-8 lg:py-20">
                 <div className="flex flex-col justify-center">
-                    <div
-                        ref={eyebrowRef}
-                        className="mb-4 inline-flex w-fit rounded-full border border-[#ebebeb] bg-white/80 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#4d4d4d] sm:text-[11px]"
-                    >
-                        {slide.eyebrow}
-                    </div>
                     <h1
                         ref={titleRef}
-                        className="max-w-xl text-[2.2rem] font-semibold leading-[0.96] tracking-[-0.08em] text-[#171717] sm:text-[3rem] lg:text-[5rem]"
+                        className="max-w-xl text-[2.2rem] font-semibold leading-[1.2] tracking-[-0.08em] text-[#171717] sm:text-[3rem] lg:text-[5rem]"
                     >
                         {slide.title}
                     </h1>
                     <p
                         ref={subtitleRef}
-                        className="mt-4 text-[1rem] font-medium text-[#171717] sm:text-[1.2rem] lg:text-[1.3rem]"
+                        className="mt-10 text-[1rem] font-medium text-[#171717] sm:text-[1.2rem] lg:text-[1.3rem]"
                     >
                         {slide.subtitle}
                     </p>
-                    <p
-                        ref={descriptionRef}
-                        className="mt-3 max-w-lg text-[0.96rem] leading-7 text-[#4d4d4d] sm:text-[1rem]"
-                    >
-                        {slide.description}
-                    </p>
 
-                    <div ref={actionsRef} className="mt-8 flex flex-wrap items-center gap-3">
+                    <div ref={actionsRef} className="mt-6 flex flex-wrap items-center gap-3">
                         <button className="rounded-full bg-[#171717] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#2b2b2b] sm:px-7">
                             Mua ngay
                         </button>

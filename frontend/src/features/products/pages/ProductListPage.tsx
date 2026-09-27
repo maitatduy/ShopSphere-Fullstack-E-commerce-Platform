@@ -149,10 +149,7 @@ export function ProductListPage() {
                 <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                     <div className="flex items-center gap-3">
                         <div>
-                            <p className="text-[11px] font-medium tracking-[0.2em] text-[#8f8f8f]">
-                                Bộ sưu tập
-                            </p>
-                            <h1 className="mt-2 text-3xl font-medium tracking-[-0.04em] text-[#171717] sm:text-4xl">
+                            <h1 className="text-3xl font-medium tracking-[-0.04em] text-[#171717] sm:text-4xl">
                                 Tinh hoa được chọn lọc
                             </h1>
                         </div>

@@ -78,7 +78,7 @@ export function ProductFilterSidebar({
                 </button>
             </div>
 
-            <div className="mt-5 space-y-6">
+            <div className="mt-5 space-y-8">
                 <label className="block">
                     <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
                         Tìm kiếm

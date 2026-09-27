@@ -50,13 +50,10 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
     };
 
     return (
-        <section data-homepage-animate className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <section data-homepage-animate className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                        Mua theo phong cách
-                    </p>
-                    <h2 className="mt-2 text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
+                    <h2 className="text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
                         {title}
                     </h2>
                 </div>

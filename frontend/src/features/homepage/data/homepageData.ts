@@ -1,6 +1,5 @@
 export type HeroSlide = {
     id: number;
-    eyebrow: string;
     title: string;
     subtitle: string;
     description: string;
@@ -29,7 +28,6 @@ export type CategoryBlock = {
 export const heroSlides: HeroSlide[] = [
     {
         id: 1,
-        eyebrow: "THU ĐÔNG 2026",
         title: "Những lớp tối giản cho chuyển động mỗi ngày.",
         subtitle: "Thiết kế cơ bản",
         description:
@@ -39,7 +37,6 @@ export const heroSlides: HeroSlide[] = [
     },
     {
         id: 2,
-        eyebrow: "BỘ SƯU TẬP MỚI",
         title: "Sang trọng tinh tế gặp gỡ năng lượng đô thị.",
         subtitle: "Cấu trúc mềm mại",
         description:
@@ -49,7 +46,6 @@ export const heroSlides: HeroSlide[] = [
     },
     {
         id: 3,
-        eyebrow: "TUYỂN CHỌN ĐẶC BIỆT",
         title: "Xây dựng tủ đồ sắc sảo hơn trong tích tắc.",
         subtitle: "Mua capsule collection",
         description:
