@@ -7,6 +7,7 @@ import com.shopsphere.backend.entity.Category;
 import com.shopsphere.backend.entity.CategoryType;
 import com.shopsphere.backend.entity.Product;
 import com.shopsphere.backend.entity.ProductVariant;
+import com.shopsphere.backend.exception.ConflictException;
 import com.shopsphere.backend.exception.ResourceNotFoundException;
 import com.shopsphere.backend.mapper.ProductMapper;
 import com.shopsphere.backend.repository.CategoryRepository;
@@ -39,6 +40,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public ProductResponse create(ProductRequest request) {
+        if (request.getSlug() != null && productRepository.existsBySlug(request.getSlug())) {
+            throw new ConflictException("Slug đã tồn tại: " + request.getSlug());
+        }
+
         Category category = getCategoryOrThrow(request.getCategoryId());
         CategoryType categoryType = getCategoryTypeOrThrow(request.getCategoryTypeId());
 
@@ -82,6 +87,12 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findWithVariantsById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sản phẩm không tồn tại: " + id));
 
+        if (request.getSlug() != null
+                && !request.getSlug().equals(product.getSlug())
+                && productRepository.existsBySlug(request.getSlug())) {
+            throw new ConflictException("Slug đã tồn tại: " + request.getSlug());
+        }
+
         Category category = getCategoryOrThrow(request.getCategoryId());
         CategoryType categoryType = getCategoryTypeOrThrow(request.getCategoryTypeId());
 
@@ -97,10 +108,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void delete(UUID id) {
-        if (!productRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Sản phẩm không tồn tại: " + id);
-        }
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Sản phẩm không tồn tại: " + id));
+        productRepository.delete(product);
     }
 
     private Category getCategoryOrThrow(UUID categoryId) {

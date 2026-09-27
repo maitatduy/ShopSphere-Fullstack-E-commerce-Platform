@@ -24,6 +24,6 @@ public class ProductVariantRequest {
     @NotBlank(message = "Kích thước không được để trống")
     private String size;
 
-    @Min(value = 0, message = "Số lượng hàng tồn kho phải lớn hơn 0")
+    @Min(value = 0, message = "Số lượng hàng tồn kho phải lớn hơn hoặc bằng 0")
     private int stockQuantity;
 }
