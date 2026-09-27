@@ -22,6 +22,7 @@ function FeaturePill({ icon, label }: { icon: React.ReactNode; label: string }) 
 }
 
 export function ProductDetailInfo({ product }: { product: ProductListItem }) {
+    const [selectedColor, setSelectedColor] = useState(product.color);
     const [selectedSize, setSelectedSize] = useState(product.size[0] ?? "M");
     const [quantity, setQuantity] = useState(1);
 
@@ -61,7 +62,7 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
                     <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#8f8f8f]">
                         Màu sắc
                     </p>
-                    <span className="text-sm text-[#4d4d4d]">{product.color}</span>
+                    <span className="text-sm text-[#4d4d4d]">{selectedColor}</span>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                     {["Sand", "Ivory", "Charcoal", "Navy", "Black"].map((color) => (
@@ -70,14 +71,14 @@ export function ProductDetailInfo({ product }: { product: ProductListItem }) {
                             type="button"
                             className={[
                                 "inline-flex h-10 w-10 items-center justify-center rounded-full border transition",
-                                product.color === color
+                                selectedColor === color
                                     ? "border-[#171717] bg-[#171717] text-white shadow-[0_10px_20px_rgba(23,23,23,0.12)]"
                                     : "border-[#e7e7e7] bg-white text-[#171717] hover:border-[#171717]",
                             ].join(" ")}
                             aria-label={`Select ${color}`}
-                            onClick={() => setSelectedSize(product.size[0] ?? "M")}
+                            onClick={() => setSelectedColor(color)}
                         >
-                            {product.color === color ? <FiCheck className="text-base" /> : null}
+                            {selectedColor === color ? <FiCheck className="text-base" /> : null}
                         </button>
                     ))}
                 </div>

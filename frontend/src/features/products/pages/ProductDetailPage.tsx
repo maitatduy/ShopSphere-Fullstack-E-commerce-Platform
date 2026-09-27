@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowLeft, FiChevronRight } from "react-icons/fi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Navigate } from "react-router-dom";
 import { AppLayout } from "../../../shared/layouts/AppLayout";
 import { ProductDescription } from "../components/ProductDescription";
 import { ProductDetailGallery } from "../components/ProductDetailGallery";
@@ -17,9 +17,13 @@ export function ProductDetailPage() {
     const pageRef = useRef<HTMLDivElement | null>(null);
 
     const product = useMemo(
-        () => productListItems.find((item) => item.id === Number(productId)) ?? productListItems[0],
+        () => productListItems.find((item) => item.id === Number(productId)),
         [productId],
     );
+
+    if (!product) {
+        return <Navigate to="/products" replace />;
+    }
 
     const galleryImages = useMemo(() => {
         const base = productListItems.filter((item) => item.id !== product.id).map((item) => item.image);

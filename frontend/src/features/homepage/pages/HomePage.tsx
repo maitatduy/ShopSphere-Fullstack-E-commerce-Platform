@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useCategories } from "../../categories/hooks/useCategories";
+import { useCategoryStore } from "../../categories/store/categoryStore";
 import { CategoryShowcase } from "../components/CategoryShowcase";
 import { HeroBanner } from "../components/HeroBanner";
 import { AppLayout } from "../../../shared/layouts/AppLayout";
@@ -14,7 +14,11 @@ gsap.registerPlugin(ScrollTrigger);
 export function HomePage() {
     const { activeIndex, goToNext, goToPrevious, goToIndex } = useAutoSlider(heroSlides.length);
     const pageRef = useRef<HTMLDivElement | null>(null);
-    const { categories, loading, error } = useCategories();
+    const { categories, loading, error, fetchCategories } = useCategoryStore();
+
+    useEffect(() => {
+        fetchCategories();
+    }, [fetchCategories]);
 
     const categoryGroups = useMemo(() => {
         const mapped = categories.slice(0, 6).map((category, index) => ({
