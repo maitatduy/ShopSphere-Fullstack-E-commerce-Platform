@@ -19,11 +19,17 @@ export function Header() {
     ];
 
     return (
-        <header data-homepage-animate className="sticky top-0 z-50 border-b border-[#ebebeb] bg-[#fafafa]/90 backdrop-blur-sm">
+        <header
+            data-homepage-animate
+            className="sticky top-0 z-50 border-b border-[#ebebeb] bg-[#fafafa]/90 backdrop-blur-sm"
+        >
             <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3 md:gap-8">
-                        <Link to="/" className="text-[1.4rem] font-semibold tracking-[-0.08em] text-[#171717] sm:text-[1.7rem]">
+                        <Link
+                            to="/"
+                            className="text-[1.4rem] font-semibold tracking-[-0.08em] text-[#171717] sm:text-[1.7rem]"
+                        >
                             ShopSphere
                         </Link>
 
@@ -56,10 +62,18 @@ export function Header() {
                         </label>
 
                         <div className="hidden items-center gap-2 md:flex">
-                            <ActionButton label="Wishlist" icon={<FiHeart />} className="hidden lg:inline-flex" />
-                            <ActionButton label="Account" icon={<FiUser />} className="hidden lg:inline-flex" />
-                            <Link to="/cart" aria-label="Cart">
-                                <ActionButton label="Cart" icon={<FiShoppingBag />} compact />
+                            <ActionButton
+                                label="Yêu thích"
+                                icon={<FiHeart />}
+                                className="hidden lg:inline-flex"
+                            />
+                            <ActionButton
+                                label="Tài khoản"
+                                icon={<FiUser />}
+                                className="hidden lg:inline-flex"
+                            />
+                            <Link to="/cart">
+                                <ActionButton label="Giỏ hàng" icon={<FiShoppingBag />} />
                             </Link>
                         </div>
 
@@ -67,9 +81,13 @@ export function Header() {
                             type="button"
                             onClick={() => setIsMenuOpen((prev) => !prev)}
                             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#ebebeb] bg-white text-[#171717] md:hidden"
-                            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                            aria-label={isMenuOpen ? "Đóng menu" : "Mở menu"}
                         >
-                            {isMenuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
+                            {isMenuOpen ? (
+                                <FiX className="text-xl" />
+                            ) : (
+                                <FiMenu className="text-xl" />
+                            )}
                         </button>
                     </div>
                 </div>
@@ -88,11 +106,13 @@ export function Header() {
                             ))}
                         </nav>
 
-                        <div className="mt-4 grid grid-cols-3 gap-2">
-                            <ActionButton label="Wishlist" icon={<FiHeart />} fullWidth />
-                            <ActionButton label="Account" icon={<FiUser />} fullWidth />
-                            <Link to="/cart" className="w-full" aria-label="Cart">
-                                <ActionButton label="Cart" icon={<FiShoppingBag />} compact fullWidth />
+                        <div className="mt-4 space-y-2">
+                            <div className="grid grid-cols-2 gap-2">
+                                <ActionButton label="Yêu thích" icon={<FiHeart />} fullWidth />
+                                <ActionButton label="Tài khoản" icon={<FiUser />} fullWidth />
+                            </div>
+                            <Link to="/cart" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                                <ActionButton label="Giỏ hàng" icon={<FiShoppingBag />} fullWidth />
                             </Link>
                         </div>
                     </div>

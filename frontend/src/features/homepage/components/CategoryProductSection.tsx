@@ -4,18 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { productService } from "../../products/services/productService";
 import type { Product } from "../../products/types";
 
-export function ProductGrid({ title }: { title: string }) {
+type CategoryProductSectionProps = {
+    categoryId: string | number;
+    title: string;
+};
+
+export function CategoryProductSection({ categoryId, title }: CategoryProductSectionProps) {
     const navigate = useNavigate();
     const [items, setItems] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         productService
-            .getProducts({ newArrival: true, size: 4, sort: "createdAt,desc" })
+            .getProducts({ categoryId: String(categoryId), size: 4, sort: "createdAt,desc" })
             .then((data) => setItems(data.content))
             .catch(() => setItems([]))
             .finally(() => setLoading(false));
-    }, []);
+    }, [categoryId]);
 
     const handleCardEnter = (event: React.MouseEvent<HTMLElement>) => {
         const card = event.currentTarget;
@@ -41,6 +46,8 @@ export function ProductGrid({ title }: { title: string }) {
         });
     };
 
+    if (!loading && items.length === 0) return null;
+
     return (
         <section
             data-homepage-animate
@@ -52,7 +59,7 @@ export function ProductGrid({ title }: { title: string }) {
                 </h2>
                 <button
                     type="button"
-                    onClick={() => navigate("/products")}
+                    onClick={() => navigate(`/products?category=${categoryId}`)}
                     className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]"
                 >
                     Xem tất cả
@@ -61,10 +68,6 @@ export function ProductGrid({ title }: { title: string }) {
 
             {loading ? (
                 <div className="py-12 text-center text-sm text-[#8f8f8f]">Đang tải...</div>
-            ) : items.length === 0 ? (
-                <div className="py-12 text-center text-sm text-[#8f8f8f]">
-                    Chưa có sản phẩm mới.
-                </div>
             ) : (
                 <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
                     {items.map((item) => (
@@ -79,11 +82,13 @@ export function ProductGrid({ title }: { title: string }) {
                                 <div className="flex h-52 w-full items-center justify-center text-sm text-[#8f8f8f] sm:h-64 lg:h-72">
                                     {item.name}
                                 </div>
-                                <div className="absolute left-4 top-4">
-                                    <span className="rounded-full bg-white/90 px-2.5 py-1 text-[0.625rem] font-medium uppercase tracking-[0.16em] text-[#171717]">
-                                        Mới
-                                    </span>
-                                </div>
+                                {item.newArrival ? (
+                                    <div className="absolute left-4 top-4">
+                                        <span className="rounded-full bg-white/90 px-2.5 py-1 text-[0.625rem] font-medium uppercase tracking-[0.16em] text-[#171717]">
+                                            Mới
+                                        </span>
+                                    </div>
+                                ) : null}
                                 <button
                                     type="button"
                                     className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#171717] shadow-sm hover:bg-white"
@@ -92,7 +97,6 @@ export function ProductGrid({ title }: { title: string }) {
                                     ♡
                                 </button>
                             </div>
-
                             <div className="space-y-3 p-5">
                                 <div className="flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.14em] text-[#8f8f8f]">
                                     <span>{item.categoryName}</span>

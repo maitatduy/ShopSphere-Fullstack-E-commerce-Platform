@@ -1,12 +1,20 @@
 import { gsap } from "gsap";
-import type { CategoryBlock } from "../data/homepageData";
+
+type CategoryBlock = {
+    id: string | number;
+    title: string;
+    subtitle: string;
+    image: string;
+    href: string;
+};
 
 type CategoryShowcaseProps = {
     title: string;
     items: CategoryBlock[];
+    onViewAll?: () => void;
 };
 
-export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
+export function CategoryShowcase({ title, items, onViewAll }: CategoryShowcaseProps) {
     const handleCardEnter = (event: React.MouseEvent<HTMLElement>) => {
         const card = event.currentTarget;
         const image = card.querySelector("img");
@@ -50,17 +58,18 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
     };
 
     return (
-        <section data-homepage-animate className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <section data-homepage-animate className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8f8f8f]">
-                        Mua theo phong cách
-                    </p>
-                    <h2 className="mt-2 text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
+                    <h2 className="text-2xl font-semibold tracking-[-0.07em] text-[#171717] sm:text-3xl">
                         {title}
                     </h2>
                 </div>
-                <button className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]">
+                <button
+                    type="button"
+                    onClick={onViewAll}
+                    className="w-fit rounded-full border border-[#ebebeb] bg-white px-4 py-2 text-sm font-medium text-[#171717] transition hover:border-[#171717]"
+                >
                     Xem tất cả
                 </button>
             </div>
@@ -79,7 +88,7 @@ export function CategoryShowcase({ title, items }: CategoryShowcaseProps) {
                                 alt={item.title}
                                 loading="lazy"
                                 decoding="async"
-                                className="h-76 w-full object-cover transition duration-500 sm:h-88 lg:h-96"
+                                className="h-56 w-full object-cover transition duration-500 sm:h-72 lg:h-80"
                             />
                         </div>
                         <div className="space-y-2 p-5">

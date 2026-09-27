@@ -1,62 +1,46 @@
-import { apiClient, normalizeList } from "../../../shared/api/apiClient";
+import { apiClient, type PageData } from "../../../shared/api/apiClient";
 import type { Category, CategoryType } from "../types";
 
 export const categoryService = {
     getCategories: async (params?: Record<string, string | number | undefined>) => {
-        const response = await apiClient.get<{ content?: Category[]; items?: Category[]; data?: Category[] }>(
-            "/v1/categories",
-            params,
-        );
-
-        return normalizeList<Category>(response.data);
+        const data = await apiClient.get<Category[]>("/v1/categories", params);
+        return Array.isArray(data) ? data : [];
     },
 
-    getCategoryById: async (id: number) => {
-        const response = await apiClient.get<Category>(`/v1/categories/${id}`);
-        return response.data;
+    getCategoryById: async (id: string) => {
+        return apiClient.get<Category>(`/v1/categories/${id}`);
     },
 
     createCategory: async (payload: Partial<Category>) => {
-        const response = await apiClient.post<Category>("/v1/categories", payload);
-        return response.data;
+        return apiClient.post<Category>("/v1/categories", payload);
     },
 
-    updateCategory: async (id: number, payload: Partial<Category>) => {
-        const response = await apiClient.put<Category>(`/v1/categories/${id}`, payload);
-        return response.data;
+    updateCategory: async (id: string, payload: Partial<Category>) => {
+        return apiClient.put<Category>(`/v1/categories/${id}`, payload);
     },
 
-    deleteCategory: async (id: number) => {
-        const response = await apiClient.del<unknown>(`/v1/categories/${id}`);
-        return response.data;
+    deleteCategory: async (id: string) => {
+        return apiClient.del<void>(`/v1/categories/${id}`);
     },
 
     getCategoryTypes: async (params?: Record<string, string | number | undefined>) => {
-        const response = await apiClient.get<{ content?: CategoryType[]; items?: CategoryType[]; data?: CategoryType[] }>(
-            "/v1/category-types",
-            params,
-        );
-
-        return normalizeList<CategoryType>(response.data);
+        const data = await apiClient.get<PageData<CategoryType>>("/v1/category-types", params);
+        return data?.content ?? [];
     },
 
-    getCategoryTypeById: async (id: number) => {
-        const response = await apiClient.get<CategoryType>(`/v1/category-types/${id}`);
-        return response.data;
+    getCategoryTypeById: async (id: string) => {
+        return apiClient.get<CategoryType>(`/v1/category-types/${id}`);
     },
 
-    createCategoryType: async (payload: Partial<CategoryType> & { categoryId: number }) => {
-        const response = await apiClient.post<CategoryType>("/v1/category-types", payload);
-        return response.data;
+    createCategoryType: async (payload: Partial<CategoryType> & { categoryId: string }) => {
+        return apiClient.post<CategoryType>("/v1/category-types", payload);
     },
 
-    updateCategoryType: async (id: number, payload: Partial<CategoryType>) => {
-        const response = await apiClient.put<CategoryType>(`/v1/category-types/${id}`, payload);
-        return response.data;
+    updateCategoryType: async (id: string, payload: Partial<CategoryType>) => {
+        return apiClient.put<CategoryType>(`/v1/category-types/${id}`, payload);
     },
 
-    deleteCategoryType: async (id: number) => {
-        const response = await apiClient.del<unknown>(`/v1/category-types/${id}`);
-        return response.data;
+    deleteCategoryType: async (id: string) => {
+        return apiClient.del<void>(`/v1/category-types/${id}`);
     },
 };

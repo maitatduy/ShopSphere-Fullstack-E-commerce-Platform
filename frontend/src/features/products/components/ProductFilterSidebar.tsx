@@ -1,195 +1,176 @@
-import { FiFilter, FiSearch } from "react-icons/fi";
-import {
-    categories,
-    colorOptions,
-    sizeOptions,
-    statusOptions,
-} from "../data/productsData";
-
-const colorSwatches: Record<string, string> = {
-    All: "#f3f4f6",
-    Sand: "#d8c7a4",
-    Ivory: "#f4efe8",
-    Cocoa: "#7b4b3a",
-    Charcoal: "#4a4a4a",
-    Black: "#1f1f1f",
-    Olive: "#65714a",
-    Sky: "#83b6d8",
-    Rose: "#d99aa3",
-    Lilac: "#b7a4d7",
-    Terracotta: "#c77557",
-    Stone: "#b8b2a5",
-    Navy: "#284a73",
-};
+import { FiSearch } from "react-icons/fi";
 
 const priceOptions = [
     { label: "Tất cả", value: "all" },
     { label: "Dưới $100", value: "0-100" },
-    { label: "$100 - $180", value: "100-180" },
+    { label: "$100 – $180", value: "100-180" },
     { label: "Trên $180", value: "180+" },
 ] as const;
 
 export type ProductFilterSidebarProps = {
-    category: (typeof categories)[number];
+    categories: string[];
+    colors: string[];
+    sizes: string[];
+    category: string;
     selectedPrice: string;
-    selectedColor: (typeof colorOptions)[number];
-    selectedSize: (typeof sizeOptions)[number];
-    selectedStatus: (typeof statusOptions)[number];
+    selectedColor: string;
+    selectedSize: string;
+    onlyNew: boolean;
     search: string;
     onSearchChange: (value: string) => void;
-    onCategoryChange: (value: (typeof categories)[number]) => void;
+    onCategoryChange: (value: string) => void;
     onPriceChange: (value: string) => void;
-    onColorChange: (value: (typeof colorOptions)[number]) => void;
-    onSizeChange: (value: (typeof sizeOptions)[number]) => void;
-    onStatusChange: (value: (typeof statusOptions)[number]) => void;
+    onColorChange: (value: string) => void;
+    onSizeChange: (value: string) => void;
+    onOnlyNewChange: (value: boolean) => void;
     onReset: () => void;
 };
 
 export function ProductFilterSidebar({
+    categories,
+    colors,
+    sizes,
     category,
     selectedPrice,
     selectedColor,
     selectedSize,
-    selectedStatus,
+    onlyNew,
     search,
     onSearchChange,
     onCategoryChange,
     onPriceChange,
     onColorChange,
     onSizeChange,
-    onStatusChange,
+    onOnlyNewChange,
     onReset,
 }: ProductFilterSidebarProps) {
+    const hasActiveFilter =
+        category !== "All" ||
+        selectedPrice !== "all" ||
+        selectedColor !== "All" ||
+        selectedSize !== "All" ||
+        onlyNew ||
+        search.trim() !== "";
+
     return (
-        <aside className="h-fit rounded-3xl border border-[#ebebeb] bg-white p-5 shadow-[0_10px_22px_rgba(23,23,23,0.02)] lg:sticky lg:top-24">
-            <div className="flex items-center justify-between gap-3 border-b border-[#f1f1f1] pb-4">
-                <div className="flex items-center gap-2 text-[#171717]">
-                    <FiFilter className="text-base" />
-                    <span className="text-sm font-medium tracking-[0.14em] text-[#4d4d4d] uppercase">
-                        Filter
-                    </span>
-                </div>
-                <button
-                    type="button"
-                    onClick={onReset}
-                    className="text-xs font-medium tracking-[0.12em] text-[#171717] uppercase transition hover:text-[#4d4d4d]"
-                >
-                    Xóa lọc
-                </button>
+        <aside className="h-fit rounded-3xl border border-[#ebebeb] bg-white p-6 shadow-[0_10px_22px_rgba(23,23,23,0.02)] lg:sticky lg:top-24">
+            <div className="flex items-center justify-between gap-3 pb-5 border-b border-[#f1f1f1]">
+                <span className="text-base font-medium text-[#171717]">Bộ lọc</span>
+                {hasActiveFilter ? (
+                    <button
+                        type="button"
+                        onClick={onReset}
+                        className="text-sm text-[#8f8f8f] transition hover:text-[#171717]"
+                    >
+                        Xóa tất cả
+                    </button>
+                ) : null}
             </div>
 
-            <div className="mt-5 space-y-6">
+            <div className="mt-6 space-y-7">
                 <label className="block">
-                    <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                        Tìm kiếm
-                    </span>
-                    <div className="flex items-center gap-2 rounded-full border border-[#ebebeb] bg-[#fafafa] px-3 py-2.5">
-                        <FiSearch className="text-sm text-[#8f8f8f]" />
+                    <div className="flex items-center gap-2 rounded-2xl border border-[#ebebeb] bg-[#fafafa] px-4 py-3">
+                        <FiSearch className="shrink-0 text-sm text-[#8f8f8f]" />
                         <input
                             value={search}
-                            onChange={(event) => onSearchChange(event.target.value)}
-                            placeholder="Tìm sản phẩm"
-                            className="w-full bg-transparent text-sm text-[#171717] placeholder:text-[#8f8f8f] outline-none"
+                            onChange={(e) => onSearchChange(e.target.value)}
+                            placeholder="Tìm sản phẩm..."
+                            className="w-full bg-transparent text-sm text-[#171717] placeholder:text-[#b3b3b3] outline-none"
                         />
                     </div>
                 </label>
 
+                {categories.length > 0 ? (
+                    <div>
+                        <p className="mb-3 text-sm font-medium text-[#171717]">Danh mục</p>
+                        <div className="flex flex-wrap gap-2">
+                            {["Tất cả", ...categories].map((item) => (
+                                <button
+                                    key={item}
+                                    type="button"
+                                    onClick={() =>
+                                        onCategoryChange(item === "Tất cả" ? "All" : item)
+                                    }
+                                    className={[
+                                        "rounded-full border px-3.5 py-1.5 text-sm transition",
+                                        (item === "Tất cả" ? category === "All" : category === item)
+                                            ? "border-[#171717] bg-[#171717] text-white"
+                                            : "border-[#ebebeb] bg-white text-[#4d4d4d] hover:border-[#d1d1d1] hover:text-[#171717]",
+                                    ].join(" ")}
+                                >
+                                    {item}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                ) : null}
+
                 <div>
-                    <p className="mb-3 text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                        Danh mục
-                    </p>
+                    <p className="mb-3 text-sm font-medium text-[#171717]">Giá</p>
                     <div className="flex flex-wrap gap-2">
-                        {categories.map((item) => (
+                        {priceOptions.map((option) => (
                             <button
-                                key={item}
+                                key={option.value}
                                 type="button"
-                                onClick={() => onCategoryChange(item)}
+                                onClick={() => onPriceChange(option.value)}
                                 className={[
-                                    "rounded-full border px-3 py-2 text-sm font-medium transition",
-                                    category === item
+                                    "rounded-full border px-3.5 py-1.5 text-sm transition",
+                                    selectedPrice === option.value
                                         ? "border-[#171717] bg-[#171717] text-white"
-                                        : "border-[#ebebeb] bg-white text-[#171717] hover:border-[#171717]",
+                                        : "border-[#ebebeb] bg-white text-[#4d4d4d] hover:border-[#d1d1d1] hover:text-[#171717]",
                                 ].join(" ")}
                             >
-                                {item}
+                                {option.label}
                             </button>
                         ))}
                     </div>
                 </div>
 
-                <div className="space-y-4">
+                {colors.length > 0 ? (
                     <div>
-                        <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Giá
-                        </span>
-                        <div className="grid gap-2">
-                            {priceOptions.map((option) => (
-                                <label
-                                    key={option.value}
-                                    className={[
-                                        "flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 text-sm transition",
-                                        selectedPrice === option.value
-                                            ? "border-[#171717] bg-[#171717] text-white"
-                                            : "border-[#ebebeb] bg-[#fafafa] text-[#171717] hover:border-[#171717]",
-                                    ].join(" ")}
-                                >
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedPrice === option.value}
-                                        onChange={() => onPriceChange(option.value)}
-                                        className="h-4 w-4 accent-[#171717]"
-                                    />
-                                    <span>{option.label}</span>
-                                </label>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div>
-                        <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Màu sắc
-                        </span>
-                        <div className="flex flex-wrap gap-2.5">
-                            {colorOptions.map((color) => (
+                        <p className="mb-3 text-sm font-medium text-[#171717]">Màu sắc</p>
+                        <div className="flex flex-wrap gap-2">
+                            {["Tất cả", ...colors].map((color) => (
                                 <button
                                     key={color}
                                     type="button"
-                                    onClick={() => onColorChange(color)}
+                                    onClick={() =>
+                                        onColorChange(color === "Tất cả" ? "All" : color)
+                                    }
                                     className={[
-                                        "flex h-11 w-11 items-center justify-center rounded-full border-2 transition",
-                                        selectedColor === color
-                                            ? "border-[#171717] scale-105"
-                                            : "border-white hover:border-[#d9d9d9]",
+                                        "rounded-full border px-3.5 py-1.5 text-sm transition",
+                                        (
+                                            color === "Tất cả"
+                                                ? selectedColor === "All"
+                                                : selectedColor === color
+                                        )
+                                            ? "border-[#171717] bg-[#171717] text-white"
+                                            : "border-[#ebebeb] bg-white text-[#4d4d4d] hover:border-[#d1d1d1] hover:text-[#171717]",
                                     ].join(" ")}
-                                    title={color}
-                                    aria-label={`Filter by ${color}`}
-                                    style={{ backgroundColor: colorSwatches[color] }}
                                 >
-                                    {color === "All" ? (
-                                        <span className="text-[0.55rem] font-semibold uppercase tracking-[0.12em] text-[#171717]">
-                                            All
-                                        </span>
-                                    ) : null}
+                                    {color}
                                 </button>
                             ))}
                         </div>
                     </div>
+                ) : null}
 
+                {sizes.length > 0 ? (
                     <div>
-                        <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Kích cỡ
-                        </span>
+                        <p className="mb-3 text-sm font-medium text-[#171717]">Kích cỡ</p>
                         <div className="flex flex-wrap gap-2">
-                            {sizeOptions.filter((size) => size !== "All").map((size) => (
+                            {sizes.map((size) => (
                                 <button
                                     key={size}
                                     type="button"
-                                    onClick={() => onSizeChange(size)}
+                                    onClick={() =>
+                                        onSizeChange(selectedSize === size ? "All" : size)
+                                    }
                                     className={[
-                                        "min-w-13 rounded-lg border px-3 py-2 text-sm font-medium transition",
+                                        "min-w-11 rounded-xl border px-3 py-1.5 text-center text-sm transition",
                                         selectedSize === size
                                             ? "border-[#171717] bg-[#171717] text-white"
-                                            : "border-[#ebebeb] bg-[#fafafa] text-[#171717] hover:border-[#171717]",
+                                            : "border-[#ebebeb] bg-white text-[#4d4d4d] hover:border-[#d1d1d1] hover:text-[#171717]",
                                     ].join(" ")}
                                 >
                                     {size}
@@ -197,29 +178,31 @@ export function ProductFilterSidebar({
                             ))}
                         </div>
                     </div>
+                ) : null}
 
-                    <div>
-                        <span className="mb-2 block text-xs font-medium tracking-[0.14em] text-[#8f8f8f] uppercase">
-                            Trạng thái
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => onOnlyNewChange(!onlyNew)}
+                        className={[
+                            "flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm transition",
+                            onlyNew
+                                ? "border-[#171717] bg-[#171717] text-white"
+                                : "border-[#ebebeb] bg-[#fafafa] text-[#4d4d4d] hover:border-[#d1d1d1] hover:text-[#171717]",
+                        ].join(" ")}
+                    >
+                        <span>Hàng mới về</span>
+                        <span
+                            className={[
+                                "flex h-4 w-4 items-center justify-center rounded-full border text-[10px] font-bold transition",
+                                onlyNew
+                                    ? "border-white bg-white text-[#171717]"
+                                    : "border-[#d1d1d1] bg-white text-transparent",
+                            ].join(" ")}
+                        >
+                            ✓
                         </span>
-                        <div className="flex flex-wrap gap-2">
-                            {statusOptions.filter((status) => status !== "All").map((status) => (
-                                <button
-                                    key={status}
-                                    type="button"
-                                    onClick={() => onStatusChange(status)}
-                                    className={[
-                                        "rounded-lg border px-3 py-2 text-sm font-medium capitalize transition",
-                                        selectedStatus === status
-                                            ? "border-[#171717] bg-[#171717] text-white"
-                                            : "border-[#ebebeb] bg-[#fafafa] text-[#171717] hover:border-[#171717]",
-                                    ].join(" ")}
-                                >
-                                    {status}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </aside>

@@ -40,6 +40,6 @@ public class Category {
     private List<CategoryType> categoryTypes = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Product> products = new ArrayList<>();
 }

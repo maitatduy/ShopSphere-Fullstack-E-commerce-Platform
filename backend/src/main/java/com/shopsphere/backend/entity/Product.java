@@ -14,6 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@NamedEntityGraph(
+        name = "Product.forDetail",
+        attributeNodes = {
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("categoryType"),
+                @NamedAttributeNode("variants")
+        }
+)
 @Entity
 @Table(name = "products")
 @Getter

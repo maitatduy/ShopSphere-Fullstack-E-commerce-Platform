@@ -1,11 +1,8 @@
 package com.shopsphere.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
@@ -18,8 +15,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class CategoryType {
+@SuperBuilder
+public class CategoryType extends BaseEntity {
 
     @Id
     @UuidGenerator
