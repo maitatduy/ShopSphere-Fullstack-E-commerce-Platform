@@ -23,3 +23,15 @@ export const CartPage = lazy(() =>
 export const CheckoutPage = lazy(() =>
     import("../features/cart/pages/CheckoutPage").then((m) => ({ default: m.CheckoutPage })),
 );
+
+export const AdminDashboardPage = lazy(() =>
+    import("../features/admin/pages/AdminDashboardPage").then((m) => ({
+        default: m.AdminDashboardPage,
+    })),
+);
+
+export const AdminCategoriesPage = lazy(() =>
+    import("../features/admin/pages/AdminCategoriesPage").then((m) => ({
+        default: m.AdminCategoriesPage,
+    })),
+);

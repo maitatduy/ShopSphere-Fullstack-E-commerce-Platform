@@ -5,6 +5,8 @@ import { AppLoadingScreen } from "./shared/components/AppLoadingScreen";
 import {
     CartPage,
     CheckoutPage,
+    AdminDashboardPage,
+    AdminCategoriesPage,
     HomePage,
     ProductDetailPage,
     ProductListPage,
@@ -16,6 +18,8 @@ export default function App() {
             <AppErrorBoundary>
                 <Suspense fallback={<AppLoadingScreen />}>
                     <Routes>
+                        <Route path="/admin" element={<AdminDashboardPage />} />
+                        <Route path="/admin/categories" element={<AdminCategoriesPage />} />
                         <Route path="/" element={<HomePage />} />
                         <Route path="/products" element={<ProductListPage />} />
                         <Route path="/products/:productId" element={<ProductDetailPage />} />

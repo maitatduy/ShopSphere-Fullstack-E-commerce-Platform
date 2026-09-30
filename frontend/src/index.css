@@ -58,6 +58,22 @@ input {
     font: inherit;
 }
 
+.field-input {
+    width: 100%;
+    border: 1px solid #deded8;
+    border-radius: 0.85rem;
+    background: #fafaf8;
+    padding: 0.7rem 0.9rem;
+    color: #171717;
+    outline: none;
+    transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.field-input:focus {
+    border-color: #191b1b;
+    background: #ffffff;
+}
+
 img {
     display: block;
     max-width: 100%;
